@@ -22,4 +22,8 @@ export class AppComponent implements OnInit {
     return produit.promo;
   }
 
+  addToCart(ev: any) {
+    console.log(ev);
+    
+  }
 }

@@ -8,7 +8,7 @@ export function createProduct(): SimpleProduct {
       id: faker.datatype.uuid(),
       name: faker.commerce.productName(),
       description: faker.commerce.productDescription(),
-      image: faker.image.imageUrl(640, 480, 'technics', true),
+      image: faker.image.avatar(),
       price: faker.commerce.price(),
       category: faker.commerce.department(),
       promo: hasPromo,

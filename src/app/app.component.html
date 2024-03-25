@@ -1,22 +1,21 @@
 <div class="grid-container">
-  <div class="grid-item">
+  <div class="grid-item" *ngFor="let prd of produits;" >
     <div [class.product-card]="true" >
-      <img [src]="produit.image" [alt]="produit.name">
+      <img [src]="prd.image" [alt]="prd.name">
       <div class="product-card-body">
         <h3 class="product-card-title">
-          {{ produit.name }}
+          {{ prd.name }}
         </h3>
 
-        <span *ngIf="isPromo(produit);else noPromo" class="promo-badge">Promo: {{ produit.promoVal }}% Off</span>
+        <span *ngIf="isPromo(prd);else noPromo" class="promo-badge">Promo: {{ prd.promoVal }}% Off</span>
         <ng-template #noPromo>
           <span>No Promo</span>
         </ng-template>
         
         <span class="product-card-price">
-          {{ produit.price }} CFA
+          {{ prd.price }} CFA
         </span>
-        <div>
-        </div>
+        <button (click)="addToCart($event)" > + Panier </button>
       </div>
     </div>
 </div>
