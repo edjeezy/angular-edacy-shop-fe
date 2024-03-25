@@ -17,4 +17,9 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     this.produits = createProducts(16);
   }
+
+  isPromo(produit: SimpleProduct): boolean {
+    return produit.promo;
+  }
+
 }

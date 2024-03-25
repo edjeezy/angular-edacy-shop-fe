@@ -1,13 +1,17 @@
 <div class="grid-container">
   <div class="grid-item">
-    <div class="product-card">
-      <img src="{{produit.image}}" alt="">
+    <div [class.product-card]="true" >
+      <img [src]="produit.image" [alt]="produit.name">
       <div class="product-card-body">
         <h3 class="product-card-title">
           {{ produit.name }}
         </h3>
 
-        <span class="promo-badge">Promo: {{produit.promo ? produit.promoVal : ""}}% Off</span>
+        <span *ngIf="isPromo(produit);else noPromo" class="promo-badge">Promo: {{ produit.promoVal }}% Off</span>
+        <ng-template #noPromo>
+          <span>No Promo</span>
+        </ng-template>
+        
         <span class="product-card-price">
           {{ produit.price }} CFA
         </span>
@@ -15,4 +19,4 @@
         </div>
       </div>
     </div>
-  </div>
+</div>
