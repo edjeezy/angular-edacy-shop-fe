@@ -1,18 +1,20 @@
 import { Component, OnInit } from "@angular/core";
 import { SimpleProduct } from "./interfaces/produit";
-import { createProducts } from "./donnees/produit.generator";
-import { Observable } from "rxjs";
+import { createProduct, createProducts } from "./donnees/produit.generator";
 
- @Component({
+
+@Component({
   templateUrl: 'app.component.html',
   styleUrls: ['app.component.css'],
   selector: 'app-root',
 })
 export class AppComponent implements OnInit {
-  produits!: SimpleProduct[];
-  
+  public produits!: SimpleProduct[];
+  public produit: SimpleProduct = createProduct();
+
+  constructor() {}
   // Avant de demmarrer fais ceci
   ngOnInit() {
-    this.produits = createProducts();
+    this.produits = createProducts(16);
   }
 }
