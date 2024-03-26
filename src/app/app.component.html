@@ -16,7 +16,14 @@
         <span class="product-card-price">
           {{ prd.price }} CFA
         </span>
-        <app-resuable-button [isPrincipal]="true" (buttonClicked)="addToCart(prd)" ></app-resuable-button>
+        <app-resuable-button [isPrincipal]="true" (buttonClicked)="addToCart(prd)">
+          <div class="left">
+            Red
+          </div>
+          <div class="right">
+            Blue
+          </div>
+        </app-resuable-button>
       </div>
     </div>
 </div>

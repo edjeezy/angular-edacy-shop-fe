@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
-import { SimpleProduct } from "./interfaces/produit";
-import { createProduct, createProducts } from "./donnees/produit.generator";
+import { createProduct, createProducts } from "./shared/donnees/produit.generator";
+import { SimpleProduct } from "./shared/interfaces/produit";
+
 
 @Component({
   templateUrl: 'app.component.html',

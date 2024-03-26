@@ -1,9 +1,10 @@
+import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Output, Input } from '@angular/core';
 
 @Component({
   selector: 'app-resuable-button',
   templateUrl: './resuable-buttons.component.html',
-  styleUrl: './resuable-buttons.component.css'
+  styleUrl: './resuable-buttons.component.css',
 })
 export class ResuableButtonsComponent {
   @Input() isPrincipal!: boolean;
