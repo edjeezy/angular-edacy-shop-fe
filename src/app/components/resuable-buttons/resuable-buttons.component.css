@@ -1,0 +1,18 @@
+.principal {
+    background-color: rgb(233, 233, 77);
+    color: black;
+    margin: 8px;
+    padding: 8px;
+    font-weight: 800;
+    text-align: center;
+}
+
+.secondaire {
+    background-color: rgb(25, 25, 24);
+    color: white;
+    margin: 8px;
+    padding: 8px;
+    font-weight: 800;
+    text-align: center;
+    border-radius: 12px;
+}

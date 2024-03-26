@@ -1,3 +1,8 @@
-<button (click)="clicked()" >
+<button
+    [ngClass]="{
+        principal: isPrincipal,
+        secondaire: isSecondary,        
+    }" 
+    (click)="clicked()" >
     Notre Boutton Ici
 </button>
