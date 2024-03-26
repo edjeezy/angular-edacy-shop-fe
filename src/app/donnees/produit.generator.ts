@@ -5,14 +5,14 @@ import { SimpleProduct } from "../interfaces/produit";
 export function createProduct(): SimpleProduct {
     const hasPromo = faker.datatype.boolean();
     return {
-      id: faker.datatype.uuid(),
+      id: faker.string.uuid(),
       name: faker.commerce.productName(),
       description: faker.commerce.productDescription(),
-      image: faker.image.avatar(),
+      image: faker.image.urlLoremFlickr({category: 'shoes'}),
       price: faker.commerce.price(),
       category: faker.commerce.department(),
       promo: hasPromo,
-      promoVal: hasPromo ? faker.datatype.number({ min: 10, max: 60 }) : undefined,
+      promoVal: hasPromo ? faker.number.int({ min: 10, max: 60 }) : undefined,
     };
 }
 

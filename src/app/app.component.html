@@ -1,3 +1,5 @@
+<app-search [placeholderMessage]="message" (searched)="filtrerProduits($event)">
+</app-search>
 <div class="grid-container">
   <div class="grid-item" *ngFor="let prd of produits;" >
     <div [class.product-card]="true" >
@@ -6,7 +8,6 @@
         <h3 class="product-card-title">
           {{ prd.name }}
         </h3>
-
         <span *ngIf="isPromo(prd);else noPromo" class="promo-badge">Promo: {{ prd.promoVal }}% Off</span>
         <ng-template #noPromo>
           <span>No Promo</span>
@@ -15,7 +16,7 @@
         <span class="product-card-price">
           {{ prd.price }} CFA
         </span>
-        <button (click)="addToCart($event)" > + Panier </button>
+        <app-resuable-button (buttonClicked)="addToCart(prd)" ></app-resuable-button>
       </div>
     </div>
 </div>
