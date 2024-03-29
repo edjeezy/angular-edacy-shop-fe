@@ -34,7 +34,9 @@
               "src/favicon.ico",
               "src/assets"
             ],
-            "styles": [],
+            "styles": [
+              "src/custom-theme.scss"
+            ],
             "scripts": []
           },
           "configurations": {
