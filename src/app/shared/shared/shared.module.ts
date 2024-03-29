@@ -3,11 +3,12 @@ import { CommonModule } from '@angular/common';
 import { SearchComponent } from '../components/search.component';
 import { ResuableButtonsComponent } from '../components/resuable-buttons/resuable-buttons.component';
 import { MatInputModule } from '@angular/material/input';
-
+import { FormsModule } from '@angular/forms';
+import {MatMenuModule} from '@angular/material/menu';
 
 const MAT_COMPONENTS = [
   MatInputModule,
-
+  MatMenuModule
 ]
 
 @NgModule({
@@ -16,11 +17,13 @@ const MAT_COMPONENTS = [
     ResuableButtonsComponent,
   ],
   imports: [
-    CommonModule, 
+    CommonModule,
+    FormsModule,
     ...MAT_COMPONENTS
   ],
   exports: [
     SearchComponent,
+    FormsModule,
     ResuableButtonsComponent,
     ...MAT_COMPONENTS
   ],

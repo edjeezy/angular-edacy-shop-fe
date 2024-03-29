@@ -9,6 +9,9 @@ import { Component, EventEmitter, Output, Input } from '@angular/core';
 export class ResuableButtonsComponent {
   @Input() isPrincipal!: boolean;
   @Input() isSecondary!: boolean;
+  @Input() btnText!: string;
+  @Input() isSubmit!: boolean;
+  @Input() isDisabled!: boolean | null;
   @Output() buttonClicked: EventEmitter<any> = new EventEmitter();
 
   clicked() {
