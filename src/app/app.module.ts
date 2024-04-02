@@ -15,7 +15,7 @@ import { NotFoundComponent } from './features/not-found/not-found.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
+    AppRoutingModule
     SharedModule
   ],
   providers: [
