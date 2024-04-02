@@ -8,6 +8,7 @@ import { LoginComponent } from './features/login/login.component';
 import { NotFoundComponent } from './features/not-found/not-found.component';
 
 @NgModule({
+  
   declarations: [
     AppComponent,
     LoginComponent,
@@ -24,3 +25,4 @@ import { NotFoundComponent } from './features/not-found/not-found.component';
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
