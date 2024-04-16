@@ -14,6 +14,10 @@ const routes: Routes = [
     component: LoginComponent
   },
   {
+    path: 'nf',
+    component: NotFoundComponent
+  },
+  {
     path: 'produits',
     loadChildren:  () => import('./features/produits/produits.module').then(m => m.ProduitsModule) 
   },

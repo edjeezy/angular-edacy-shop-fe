@@ -20,7 +20,7 @@ import { NotFoundComponent } from './features/not-found/not-found.component';
     SharedModule
   ],
   providers: [
-    provideAnimationsAsync()
+    provideAnimationsAsync(),
   ],
   bootstrap: [AppComponent]
 })

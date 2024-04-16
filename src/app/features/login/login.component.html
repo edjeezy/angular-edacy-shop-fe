@@ -1,6 +1,6 @@
-<div class="h-screen w-screen bg-amber-200 flex items-center justify-center">
+<div class="h-screen w-screen bg-amber-500 flex items-center justify-center">
     <form #form="ngForm" (ngSubmit)="onSubmit()" class="bg-white flex flex-col space-y-4 p-4 w-full sm:w-1/2 rounded-lg">
-        <h1>Se connecter</h1>
+        <h1>Se connecter </h1>
         <mat-form-field class="example-full-width">
             <mat-label>E-mail</mat-label>
             <input matInput placeholder="xyw@mail.com" name="email" type="email" [(ngModel)]="email" required [email]="true">
@@ -29,7 +29,6 @@
             [isDisabled]="form.invalid"  
             [isSubmit]="true" 
             [btnText]="'CONNEXION'" 
-            [isPrincipal]="true">
-        </app-resuable-button>
+            [isPrincipal]="true" />
     </form>
 </div>
