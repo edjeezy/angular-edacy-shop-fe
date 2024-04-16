@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../../shared/services/auth.service';
 import { Observable } from 'rxjs';
+import { SimpleProduct } from '../../../shared/interfaces/produit';
 
 @Component({
   selector: 'app-product-list',
@@ -8,7 +9,7 @@ import { Observable } from 'rxjs';
   styleUrl: './product-list.component.css'
 })
 export class ProductListComponent implements OnInit {
-  compteur2!: Observable<number>;
+  produits!: SimpleProduct[];
   constructor(
     private authervice: AuthService
   ) {}
@@ -17,6 +18,14 @@ export class ProductListComponent implements OnInit {
 
   }
 
+  isPromo(product: SimpleProduct) {
+
+  }
+
+
+  addToCart(product: SimpleProduct) {
+
+  }
   logout() {
     this.authervice.logout();
   }

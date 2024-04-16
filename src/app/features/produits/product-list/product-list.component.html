@@ -1,9 +1,11 @@
+<div class="">
+
+</div>
+
 <app-resuable-button  [btnText]="'DECONNEXION'" (buttonClicked)="logout()" />
 
-<!-- 
-
-  <app-search [placeholderMessage]="message" (searched)="filtrerProduits($event)">
-</app-search>
+<!--   <app-search [placeholderMessage]="message" (searched)="filtrerProduits($event)">
+</app-search> -->
 <div class="grid-container">
   <div class="grid-item" *ngFor="let prd of produits;" >
     <div [class.product-card]="true" >
