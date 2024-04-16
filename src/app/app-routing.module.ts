@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './features/login/login.component';
 import { NotFoundComponent } from './features/not-found/not-found.component';
+import { CanActivatedGuard } from './shared/guards/auth.guard';
 
 const routes: Routes = [
   {
@@ -11,15 +12,20 @@ const routes: Routes = [
   },
   {
     path: 'login',
-    component: LoginComponent
-  },
-  {
-    path: 'nf',
-    component: NotFoundComponent
+    component: LoginComponent,
+    canActivate: []
+/*     children: [
+      {
+        path: 'edit',
+        //component: EditLoginComponent,
+      }
+    ]
+ */
   },
   {
     path: 'produits',
-    loadChildren:  () => import('./features/produits/produits.module').then(m => m.ProduitsModule) 
+    loadChildren:  () => import('./features/produits/produits.module').then(m => m.ProduitsModule),
+    canActivate: [ CanActivatedGuard,  ]
   },
   {
     path: '**',

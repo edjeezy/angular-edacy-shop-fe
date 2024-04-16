@@ -18,10 +18,16 @@ export class AuthService {
   ) {
   }
 
+  isLoggedIn(): boolean {
+    const user = localStorage.getItem('user');
+    console.log('Guard appele', !!user);
+    
+    return !!user;
+  }
+
   login(email: string, mdp: string) {
     const listofMails = [ 'test@test.com', 'admin@test.com'];
     const passwordCheck = 'password';
-
     if( listofMails.includes(email) &&  mdp === passwordCheck) {
       const data = {
         mail: email,
@@ -36,6 +42,7 @@ export class AuthService {
   }
 
   logout() {
-    
+    localStorage.clear();
+    this.router.navigate(['/login']);
   }
 }

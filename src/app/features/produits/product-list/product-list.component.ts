@@ -17,4 +17,8 @@ export class ProductListComponent implements OnInit {
 
   }
 
+  logout() {
+    this.authervice.logout();
+  }
+
 }
