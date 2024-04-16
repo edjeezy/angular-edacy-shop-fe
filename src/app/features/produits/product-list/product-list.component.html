@@ -7,7 +7,7 @@
 <!--   <app-search [placeholderMessage]="message" (searched)="filtrerProduits($event)">
 </app-search> -->
 <div class="grid-container">
-  <div class="grid-item" *ngFor="let prd of produits;" >
+  <div class="grid-item" *ngFor="let prd of produits" >
     <div [class.product-card]="true" >
       <img [src]="prd.image" [alt]="prd.name">
       <div class="product-card-body">
@@ -33,4 +33,3 @@
       </div>
     </div>
 </div>
- -->
