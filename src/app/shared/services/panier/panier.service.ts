@@ -10,7 +10,7 @@ export class PanierService {
   panier$ = new BehaviorSubject<SimpleProduct[]>([]);
 
   ajouter(obj: SimpleProduct) {
-    this.panier$.next([obj, ...this.panier$.value] )
+    this.panier$.next([obj, ...this.panier$.value])
   }
 
   enlever(obj: SimpleProduct) {
