@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, combineLatest, first, from, interval, map, of, switchMap, tap } from 'rxjs';
+import { BehaviorSubject, Observable, catchError, combineLatest, first, from, interval, map, of, retry, switchMap, tap } from 'rxjs';
 import { SimpleProduct } from '../../interfaces/produit';
 
 @Injectable({
@@ -18,8 +18,6 @@ export class ProduitsService {
     tap((x) => console.log('before', x)),
     map((x) => x + 1),
   );
-
-
   constructor(
     private httpClient: HttpClient
   ) { }
@@ -27,6 +25,11 @@ export class ProduitsService {
   getAllProducts(): Observable<any[]> {
     return this.httpClient.get<SimpleProduct[]>(this.url).pipe(
       tap(produits => console.log(produits)),
+      retry(3),
+      catchError((error) => {
+        console.log(error);
+        return of([]);
+      })
     );
   }
 

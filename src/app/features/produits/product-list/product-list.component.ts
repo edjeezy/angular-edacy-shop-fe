@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AuthService } from '../../../shared/services/auth.service';
-import { Observable, Subscription } from 'rxjs';
+import { Observable, Subscription, tap } from 'rxjs';
 import { SimpleProduct } from '../../../shared/interfaces/produit';
 import { createProducts } from '../../../shared/donnees/produit.generator';
 import { ProduitsService } from '../../../shared/services/produits/produits.service';
@@ -27,7 +27,9 @@ export class ProductListComponent implements OnInit, OnDestroy {
       console.log(e);
     });
 
-    this.productService.getMyService().subscribe()
+    this.authervice.getStatus().pipe(tap((x) => console.log('status', x))).subscribe();
+
+    //this.productService.getMyService().subscribe()
   }
 
   isPromo(product: SimpleProduct) {
