@@ -22,6 +22,12 @@ export class ProductListComponent implements OnInit, OnDestroy {
     this.prodRef = this.productService.getAllProducts().subscribe(p => {
       this.produits = p;
     });
+
+    this.productService.reactiveInterval$.subscribe((e) => {
+      console.log(e);
+    });
+
+    this.productService.getMyService().subscribe()
   }
 
   isPromo(product: SimpleProduct) {

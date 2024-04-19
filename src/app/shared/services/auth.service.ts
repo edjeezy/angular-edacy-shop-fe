@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, from, interval, of } from 'rxjs';
 
 enum Roles {
   ADMIN,
@@ -13,6 +13,7 @@ enum Roles {
 })
 
 export class AuthService {
+
   constructor(
     private router: Router
   ) {

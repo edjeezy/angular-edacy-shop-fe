@@ -421,5 +421,11 @@
             "promo": true,
             "promoVal": 51
         }
+    ],
+    "services": [
+        {
+            "name":"Sleek Concrete Shoes",
+            "id": "cf6722dc-ae4b-4375-85a1-81fd9dbadb7d"
+        }
     ]
 }

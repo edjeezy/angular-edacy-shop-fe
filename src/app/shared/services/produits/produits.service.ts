@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, combineLatest, first, tap } from 'rxjs';
+import { Observable, combineLatest, first, from, interval, map, of, switchMap, tap } from 'rxjs';
 import { SimpleProduct } from '../../interfaces/produit';
 
 @Injectable({
@@ -11,15 +11,30 @@ export class ProduitsService {
   enpdoint = 'produits';
   serviceEndpoint = 'services';
   url = this.apiUrl + this.enpdoint;
+  serviceUrl = this.apiUrl + this.serviceEndpoint;
+  exObservable$ = from('whqvhqwd');
+  ex2$ = of(Promise.resolve());
+  reactiveInterval$ = interval(2000).pipe(
+    tap((x) => console.log('before', x)),
+    map((x) => x + 1),
+  );
+
+
   constructor(
     private httpClient: HttpClient
   ) { }
 
-  getAllProducts(): Observable<SimpleProduct[]> {
+  getAllProducts(): Observable<any[]> {
     return this.httpClient.get<SimpleProduct[]>(this.url).pipe(
       tap(produits => console.log(produits)),
-      //first()
+    );
+  }
 
+  getMyService() {
+    return this.httpClient.get<SimpleProduct[]>(this.url).pipe(
+      tap(produits => console.log("before", produits)),
+      switchMap((produits) => this.httpClient.get(this.serviceUrl + "/" + produits[0].id)),
+      tap(produits => console.log("after", produits)),
     );
   }
 
