@@ -8,4 +8,5 @@ export interface SimpleProduct {
     category?: string;
     promo: boolean;
     promoVal?: number; // Optionel
+    sellerPhone? : string;
 }
