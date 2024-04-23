@@ -21,6 +21,24 @@ export class AppComponent implements OnInit {
 
     this.produits = createProducts(36);
     this.productCache = this.produits;
+
+    const objA: any = { name: 'Asse', id: 0, };
+
+    const objB: any = { name: 'Modou'};
+
+    const objC: any = {...objA, name: 'Ass2'};
+
+
+
+    console.log('destructuration object', objC);
+    
+    const a = [1 , 3];
+    const b = [4]
+
+    const c = [...a, ...b, 5]
+
+    console.log('destructuration', c);
+    
   }
 
   public isPromo(produit: SimpleProduct): boolean {

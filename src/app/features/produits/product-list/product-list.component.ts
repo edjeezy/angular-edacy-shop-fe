@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AuthService } from '../../../shared/services/auth.service';
-import { Observable, Subscription, tap } from 'rxjs';
+import { Observable, Subject, Subscription, first, from, lastValueFrom, take, takeUntil, tap } from 'rxjs';
 import { SimpleProduct } from '../../../shared/interfaces/produit';
 import { createProducts } from '../../../shared/donnees/produit.generator';
 import { ProduitsService } from '../../../shared/services/produits/produits.service';
@@ -12,22 +12,40 @@ import { ProduitsService } from '../../../shared/services/produits/produits.serv
 })
 export class ProductListComponent implements OnInit, OnDestroy {
   produits!: SimpleProduct[];
-  prodRef!: Subscription
+  destroy$ = new Subject();
   constructor(
     private authervice: AuthService,
     private productService: ProduitsService
   ) {}
 
-  ngOnInit(): void {
-    this.prodRef = this.productService.getAllProducts().subscribe(p => {
-      this.produits = p;
-    });
 
-    this.productService.reactiveInterval$.subscribe((e) => {
+  ngOnInit(): void {
+    this.getProds();
+/*     this.productService.getAllProducts()
+    .pipe(
+      // Garder jusqua
+      takeUntil(this.destroy$),
+      //Prends le premier seulement
+      first(),
+      // Prends x elementss avant de completer
+      take(3),
+    )
+    .subscribe(p => {
+      this.produits = p;
+    }); */
+
+    this.productService.reactiveInterval$
+    .pipe(
+      takeUntil(this.destroy$)
+    )
+    .subscribe((e) => {
       console.log(e);
     });
 
-    this.authervice.getStatus().pipe(tap((x) => console.log('status', x))).subscribe();
+    this.authervice.getStatus().pipe(
+      takeUntil(this.destroy$),
+      tap((x) => console.log('status', x))
+    ).subscribe();
 
     //this.productService.getMyService().subscribe()
   }
@@ -41,6 +59,23 @@ export class ProductListComponent implements OnInit, OnDestroy {
 
   }
 
+  async getProds() {
+    try {
+      this.produits = await lastValueFrom(
+        this.productService.getAllProducts()
+       .pipe(
+         // Garder jusqua
+         takeUntil(this.destroy$),
+         //Prends le premier seulement
+         first(),
+       )
+      );
+    } catch (error) {
+      console.error(error)
+      
+    }
+  }
+
 
   logout() {
     this.authervice.logout();
@@ -48,6 +83,6 @@ export class ProductListComponent implements OnInit, OnDestroy {
 
 
   ngOnDestroy(): void {
-      this.prodRef.unsubscribe();
+      this.destroy$.next(null);
   }
 }
