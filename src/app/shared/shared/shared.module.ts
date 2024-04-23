@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { SearchComponent } from '../components/search.component';
 import { ResuableButtonsComponent } from '../components/resuable-buttons/resuable-buttons.component';
 import { MatInputModule } from '@angular/material/input';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {MatMenuModule} from '@angular/material/menu';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -21,6 +21,7 @@ const MAT_COMPONENTS = [
     CommonModule,
     FormsModule,
     HttpClientModule,
+    ReactiveFormsModule,
     ...MAT_COMPONENTS
   ],
   exports: [
@@ -28,6 +29,7 @@ const MAT_COMPONENTS = [
     FormsModule,
     ResuableButtonsComponent,
     HttpClientModule,
+    ReactiveFormsModule,
     ...MAT_COMPONENTS
   ],
 })

@@ -25,4 +25,3 @@ import { NotFoundComponent } from './features/not-found/not-found.component';
   bootstrap: [AppComponent]
 })
 export class AppModule { }
-

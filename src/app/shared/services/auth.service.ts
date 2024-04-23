@@ -41,11 +41,16 @@ export class AuthService {
     if( listofMails.includes(email) &&  mdp === passwordCheck) {
       const data = {
         mail: email,
-        role: Roles.USER,
+        role: Roles.ADMIN,
       };
 
       localStorage.setItem('user', JSON.stringify(data));
-      this.router.navigate(['/produits']);
+
+      if (data.role === Roles.ADMIN) {
+        this.router.navigate(['/admin']);
+      } else {
+        this.router.navigate(['/produits']);
+      }
     } else {
       alert('Email ou mot de passe incorrect');
     }
