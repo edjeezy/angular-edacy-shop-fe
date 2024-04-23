@@ -1,34 +1,46 @@
 <div class="h-screen w-screen bg-amber-500 flex items-center justify-center">
-    <form #form="ngForm" (ngSubmit)="onSubmit()" class="bg-white flex flex-col space-y-4 p-4 w-full sm:w-1/2 rounded-lg">
+    <form  class="bg-white flex flex-col space-y-4 p-4 w-full sm:w-1/2 rounded-lg">
         <h1>Se connecter </h1>
         <mat-form-field class="example-full-width">
             <mat-label>E-mail</mat-label>
-            <input matInput placeholder="xyw@mail.com" name="email" type="email" [(ngModel)]="email" required [email]="true">
+            <input matInput placeholder="xyw@mail.com" name="email" [formControl]="email" type="email" >
         </mat-form-field>
-        <mat-error *ngIf="form.controls['email']?.errors">
-            <span *ngIf="form.controls['email']?.errors?.['required']">
+        <div *ngIf="email.errors">
+            <span *ngIf="email?.errors?.['required']">
                 L'email est requis
             </span>
-            <span *ngIf="form.controls['email']?.errors?.['email']">
+            <span *ngIf="email?.errors?.['email']">
                 L'email n'est pas valide
             </span>
-        </mat-error>
+        </div>
         <mat-form-field class="example-full-width">
             <mat-label>Mot de passe</mat-label>
-            <input matInput type="password" name="password" [(ngModel)]="password" minlength="6" required>
+            <input matInput type="password" name="password">
         </mat-form-field>
-        <mat-error *ngIf="form.controls['email']?.errors">
-            <span *ngIf="form.controls['email']?.errors?.['required']">
+         <mat-error *ngIf="form.controls['password']?.errors">
+            <span *ngIf="form.controls['password']?.errors?.['required']">
                Mot de passe requis
             </span>
-            <span *ngIf="form.controls['email']?.errors?.['minlength']">
+            <span *ngIf="form.controls['password']?.errors?.['minlength']">
                 Mot de passe requis 6 characters min
              </span>
         </mat-error>
-        <app-resuable-button 
+<!--         <app-resuable-button 
             [isDisabled]="form.invalid"  
             [isSubmit]="true" 
             [btnText]="'CONNEXION'" 
-            [isPrincipal]="true" />
+            [isPrincipal]="true" /> -->
     </form>
 </div>
+
+
+
+<!-- <button [disabled]="email.invalid" class="p-4 bg-amber-500 disabled:bg-slate-500" (click)="testEmail()" >
+    TEST BOUTTON
+</button>
+<button class="p-4 bg-amber-500 disabled:bg-slate-500" (click)="setEmail()" >
+    TEST set email
+</button>
+<button class="p-4 bg-amber-500 disabled:bg-slate-500" (click)="handleActivation()" >
+    TEST DISABLE
+</button> -->
