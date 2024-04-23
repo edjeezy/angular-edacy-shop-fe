@@ -11,22 +11,34 @@ import { delay, tap } from 'rxjs';
 })
 export class LoginComponent implements OnInit {
 
-  email: FormControl = new FormControl('', [Validators.email, Validators.required]);
-  password!: string;
-
   form: FormGroup = new FormGroup({
     email: new FormControl('', [Validators.email, Validators.required]),
     password: new FormControl('', [Validators.minLength(6), Validators.required]),
-  })
+  });
 
   constructor(
     private authService: AuthService,
-  ) {}
+  ) {
+    
+  }
+   
+  get email() {
+    return this.form?.get('email') as FormControl;
+  }
+
+  get password() {
+    return this.form?.get('password') as FormControl;
+  }
 
   ngOnInit(): void {
     this.email.valueChanges.pipe(
       // Ajoute un delai de x millisecondes
       delay(2300),
+      tap(console.log)
+    ).subscribe();
+
+    this.password.valueChanges.pipe(
+      // Ajoute un delai de x millisecondes
       tap(console.log)
     ).subscribe();
   }
@@ -40,6 +52,7 @@ export class LoginComponent implements OnInit {
     /* ENLEVER LES VALIDATEURS */
     this.email.clearValidators();
     this.email.updateValueAndValidity();
+    // this.email.addValidators([Validators.maxLength(300)]);
 
     /* GERER LE DISABLED STATE */
     this.email.disabled ? this.email.enable() : this.email.disable();
@@ -58,6 +71,6 @@ export class LoginComponent implements OnInit {
   }
   
   onSubmit() {
-    //this.authService.login('', this.email, ;this.password);
+    this.authService.login(this.email.value, this.password.value);
   }
 }
