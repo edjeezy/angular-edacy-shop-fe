@@ -3,6 +3,7 @@ import { AuthService } from '../../../shared/services/auth.service';
 import { ProduitsService } from '../../../shared/services/produits/produits.service';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { tap } from 'rxjs';
+import { phoneNumberValidator } from '../../../shared/validators/senegal-phone';
 
 
 
@@ -34,7 +35,7 @@ export class AdminPageComponent implements OnInit {
     category: new FormControl('', [Validators.required]),
     promo: new FormControl(null),
     promoVal: new FormControl(''),
-    sellerPhone: new FormControl('', [Validators.required]),
+    sellerPhone: new FormControl('', [Validators.required, phoneNumberValidator(/^(?:(?:(?:\+|00)33[ ]?(?:\(0\)[ ]?)?)|0){1}[1-9]{1}([ .-]?)(?:\d{2}\1?){3}\d{2}$/)]),
   });
 
   formMaker: FormMaker[] = [
