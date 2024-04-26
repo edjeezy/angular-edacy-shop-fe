@@ -4,6 +4,8 @@ import { ProduitsService } from '../../../shared/services/produits/produits.serv
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { tap } from 'rxjs';
 import { phoneNumberValidator } from '../../../shared/validators/senegal-phone';
+import { SimpleProduct } from '../../../shared/interfaces/produit';
+import { createProduct } from '../../../shared/donnees/produit.generator';
 
 
 
@@ -31,11 +33,11 @@ export class AdminPageComponent implements OnInit {
     name: new FormControl('', [Validators.required]),
     description: new FormControl(''),
     image: new FormControl('', [Validators.required]),
-    price: new FormControl(0, [Validators.required]),
+    price: new FormControl('', [Validators.required]),
     category: new FormControl('', [Validators.required]),
-    promo: new FormControl(null),
+    promo: new FormControl(),
     promoVal: new FormControl(''),
-    sellerPhone: new FormControl('', [Validators.required, phoneNumberValidator(/^(?:(?:(?:\+|00)33[ ]?(?:\(0\)[ ]?)?)|0){1}[1-9]{1}([ .-]?)(?:\d{2}\1?){3}\d{2}$/)]),
+    sellerPhone: new FormControl('', [Validators.required, phoneNumberValidator(/^(221|00221|\+221)?(77|78|75|70|76)[0-9]{7}$/)]),
   });
 
   formMaker: FormMaker[] = [
@@ -106,8 +108,36 @@ export class AdminPageComponent implements OnInit {
     // Methode reactive
       const promo = this.produitForm.get('promo') as FormControl;
       promo.valueChanges.pipe(
-        tap((val) => val ? this.promoVal.enable() : this.promoVal.disable())
+        tap(console.log)
       ).subscribe();
+
+      this.initForm();
+  }
+
+  private initForm() {
+    setTimeout(() => {
+      const produit: SimpleProduct = {
+          id: "f63bbdb4-d9bb-48c4-9a56-85656c114a8f",
+          name: "Incredible Soft Table",
+          description: "The beautiful range of Apple Naturalé that has an exciting mix of natural ingredients. With the Goodness of 100% Natural Ingredients",
+          image: "https://loremflickr.com/640/480/shoes?lock=6520560058105856",
+          price: "76.00",
+          category: 1,
+          promo: true,
+          promoVal: 20,
+          sellerPhone: '00221776771211'
+      };
+
+      this.produitForm.get('name')?.setValue(produit.name);
+      this.produitForm.get('description')?.setValue(produit.description);
+      this.produitForm.get('image')?.setValue(produit.image);
+      this.produitForm.get('price')?.setValue(produit.price as string);
+      this.produitForm.get('category')?.setValue(produit.category as string);
+      // Eviter d'emmettre un evenement
+      this.produitForm.get('promo')?.setValue(produit.promo, {emitEvent: false});
+      this.produitForm.get('promoVal')?.setValue(produit.promoVal as string);
+      this.produitForm.get('sellerPhone')?.setValue(produit.sellerPhone as string);
+    }, 2000)
   }
 
   getCategories(ctrl: FormMaker): FormOptions[] {

@@ -5,8 +5,8 @@ export interface SimpleProduct {
     description: string;
     image: string;
     price?: string;
-    category?: string;
+    category?: string | number;
     promo: boolean;
-    promoVal?: number; // Optionel
+    promoVal?: number | string; // Optionel
     sellerPhone? : string;
 }
