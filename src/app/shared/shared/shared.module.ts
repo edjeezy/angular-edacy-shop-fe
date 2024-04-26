@@ -6,10 +6,12 @@ import { MatInputModule } from '@angular/material/input';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {MatMenuModule} from '@angular/material/menu';
 import { HttpClientModule } from '@angular/common/http';
+import {MatSelectModule} from '@angular/material/select';
 
 const MAT_COMPONENTS = [
   MatInputModule,
-  MatMenuModule
+  MatMenuModule,
+  MatSelectModule,
 ]
 
 @NgModule({

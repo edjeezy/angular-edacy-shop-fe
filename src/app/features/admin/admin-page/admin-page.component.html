@@ -1,33 +1,46 @@
 <div class="w-screen p-3 bg-amber-500 text-slate-950 flex items-center justify-between">
     <h1>Edacy Admin</h1>
     <div>
-        <app-resuable-button (click)="logout()" [btnText]="'LOG OUT'"/>
+        <app-resuable-button (click)="logout()" [btnText]="'LOG OUT'" />
     </div>
 </div>
 <div class="w-screen flex items-center justify-center">
     <div class="container ">
         <form [formGroup]="produitForm" (ngSubmit)="ajouterUnProduit()" class="w-full bg-slate-300 rounded mt-2">
             <div *ngFor="let _ctrl of formMaker" class="mt-1 w-full px-4">
-                <mat-form-field class="example-full-width">
-                    <mat-label>{{_ctrl.name}}</mat-label>
-                    <input matInput [placeholder]="_ctrl.name" 
-                    [formControlName]="_ctrl.key"
-                    name="email" [type]="_ctrl.type" >
-                </mat-form-field>
-                <mat-error *ngIf="_ctrl.control?.errors">
-                    <span *ngIf="_ctrl?.control?.errors?.['required']">
-                       {{_ctrl.name}} est requis
-                    </span>
-                    <span *ngIf="_ctrl?.control?.errors?.['senegalPhone']">
-                        {{_ctrl.name}} n'est pas valide
-                    </span>
-                </mat-error>
+                <ng-container [ngSwitch]="_ctrl.type">
+                    <ng-container *ngSwitchCase="'select'">
+                            <mat-form-field>
+                                <mat-label>{{_ctrl.name}}</mat-label>
+                                <mat-select [formControlName]="_ctrl.key">
+                                    <mat-option *ngFor="let opt of getCategories(_ctrl)" [value]="opt.value">
+                                        {{opt.name}}
+                                    </mat-option>
+                                </mat-select>
+                              </mat-form-field>
+                    </ng-container>
+                    <p *ngSwitchCase="false">
+
+                    </p>
+                    <ng-container *ngSwitchDefault>
+                        <mat-form-field class="example-full-width">
+                            <mat-label>{{_ctrl.name}}</mat-label>
+                            <input matInput [placeholder]="_ctrl.name" [formControlName]="_ctrl.key" name="email"
+                                [type]="_ctrl.type">
+                        </mat-form-field>
+                        <mat-error *ngIf="_ctrl.control?.errors">
+                            <span *ngIf="_ctrl?.control?.errors?.['required']">
+                                {{_ctrl.name}} est requis
+                            </span>
+                            <span *ngIf="_ctrl?.control?.errors?.['senegalPhone']">
+                                {{_ctrl.name}} n'est pas valide
+                            </span>
+                        </mat-error>
+                    </ng-container>
+                </ng-container>
             </div>
-            <app-resuable-button 
-            [isDisabled]="produitForm.invalid"  
-            [isSubmit]="true" 
-            [btnText]="'CONNEXION'" 
-            [isPrincipal]="true" />
+            <app-resuable-button [isDisabled]="produitForm.invalid" [isSubmit]="true" [btnText]="'CONNEXION'"
+                [isPrincipal]="true" />
         </form>
     </div>
 </div>

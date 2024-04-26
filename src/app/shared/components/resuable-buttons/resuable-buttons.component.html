@@ -1,12 +1,12 @@
 <ng-content select=".right"></ng-content>
 <button
-[disabled]="isDisabled"
-[class.bg-gray-500]="isDisabled"
-[type]="isSubmit ? 'submit' : 'button'" class="border border-white rounded-xl bg-amber-500 text-slate-900 p-4"
-    [ngClass]="{
-        principal: isPrincipal,
-        secondaire: isSecondary,        
-    }" 
+    [disabled]="isDisabled"
+    [class.bg-gray-500]="isDisabled"
+    [type]="isSubmit ? 'submit' : 'button'" class="border border-white rounded-xl bg-amber-500 text-slate-900 p-4"
+        [ngClass]="{
+            principal: isPrincipal,
+            secondaire: isSecondary,        
+        }" 
     (click)="clicked()">
    {{btnText}}
 </button>
