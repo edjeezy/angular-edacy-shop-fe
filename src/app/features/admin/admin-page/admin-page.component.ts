@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../../shared/services/auth.service';
 import { ProduitsService } from '../../../shared/services/produits/produits.service';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { tap } from 'rxjs';
 
 
 
@@ -15,7 +16,7 @@ interface FormMaker {
 
 interface FormOptions {
   name: string,
-  value: string | number,
+  value: string | number | boolean,
 }
 
 
@@ -24,16 +25,16 @@ interface FormOptions {
   templateUrl: './admin-page.component.html',
   styleUrl: './admin-page.component.css'
 })
-export class AdminPageComponent {
+export class AdminPageComponent implements OnInit {
   produitForm = new FormGroup({
-    name: new FormControl(''),
+    name: new FormControl('', [Validators.required]),
     description: new FormControl(''),
-    image: new FormControl(''),
-    price: new FormControl(0),
-    category: new FormControl(''),
+    image: new FormControl('', [Validators.required]),
+    price: new FormControl(0, [Validators.required]),
+    category: new FormControl('', [Validators.required]),
     promo: new FormControl(null),
     promoVal: new FormControl(''),
-    sellerPhone: new FormControl(''),
+    sellerPhone: new FormControl('', [Validators.required]),
   });
 
   formMaker: FormMaker[] = [
@@ -42,7 +43,7 @@ export class AdminPageComponent {
     { name: 'Image du produit', key: 'image',  type: 'text', control: this.produitForm.get('image') as FormControl},
     { name: 'Prix du produit', key: 'price',  type: 'text', control: this.produitForm.get('price') as FormControl},
     { name: 'Categuorie du produit', key: 'category', type: 'select',  control: this.produitForm.get('category') as FormControl},
-    { name: 'Promo du produit', key: 'promo', type: 'text',  control: this.produitForm.get('promo') as FormControl},
+    { name: 'Promo du produit', key: 'promo', type: 'select',  control: this.produitForm.get('promo') as FormControl},
     { name: 'Valeur Promo du produit', key: 'promoVal', type: 'select',  control: this.produitForm.get('promoVal') as FormControl},
     { name: 'Numero de telephone du vendeur', key: 'sellerPhone',  type: 'text', control: this.produitForm.get('sellerPhone') as FormControl},
   ];
@@ -77,6 +78,17 @@ export class AdminPageComponent {
     },
   ]
 
+  isPromoOpts: FormOptions[] = [
+    {
+      name: 'Oui',
+      value: true,
+    },
+    {
+      name: 'Non',
+      value: false,
+    },
+  ]
+
   constructor(
     private authService: AuthService,
     private prodService: ProduitsService,
@@ -84,6 +96,18 @@ export class AdminPageComponent {
   ) {
   }
 
+  get promoVal() {
+    return this.produitForm.get('promoVal') as FormControl;
+  }
+  
+
+  ngOnInit(): void {
+    // Methode reactive
+      const promo = this.produitForm.get('promo') as FormControl;
+      promo.valueChanges.pipe(
+        tap((val) => val ? this.promoVal.enable() : this.promoVal.disable())
+      ).subscribe();
+  }
 
   getCategories(ctrl: FormMaker): FormOptions[] {
     if (ctrl.type === 'select') {
@@ -94,6 +118,10 @@ export class AdminPageComponent {
       if (ctrl.key === 'promoVal') {
        return this.promoOptions 
       }
+      
+      if (ctrl.key === 'promo') {
+        return this.isPromoOpts 
+       }
      }
 
      return [];
@@ -103,8 +131,19 @@ export class AdminPageComponent {
     console.log(
       this.produitForm.value
     );
-    }
+  }
   
+  promoChanged(ev: string | number | boolean, ctrl: FormMaker) {
+    if (ctrl.key === 'promo' ) {
+      const value = ev as boolean;
+      if(!value) {
+        this.produitForm.get('promoVal')?.disable();
+        this.produitForm.get('promoVal')?.reset();
+      } else {
+        this.produitForm.get('promoVal')?.enable();
+      }
+    }
+  }
 
 
   logout() {

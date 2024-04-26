@@ -7,25 +7,22 @@
 <div class="w-screen flex items-center justify-center">
     <div class="container ">
         <form [formGroup]="produitForm" (ngSubmit)="ajouterUnProduit()" class="w-full bg-slate-300 rounded mt-2">
-            <div *ngFor="let _ctrl of formMaker" class="mt-1 w-full px-4">
+            <div *ngFor="let _ctrl of formMaker" class="mt-1 w-full px-4 divide-y-2">
                 <ng-container [ngSwitch]="_ctrl.type">
                     <ng-container *ngSwitchCase="'select'">
-                            <mat-form-field>
+                            <mat-form-field class="w-full">
                                 <mat-label>{{_ctrl.name}}</mat-label>
-                                <mat-select [formControlName]="_ctrl.key">
+                                <mat-select [formControlName]="_ctrl.key" (valueChange)="promoChanged($event, _ctrl)" >
                                     <mat-option *ngFor="let opt of getCategories(_ctrl)" [value]="opt.value">
                                         {{opt.name}}
                                     </mat-option>
                                 </mat-select>
                               </mat-form-field>
                     </ng-container>
-                    <p *ngSwitchCase="false">
-
-                    </p>
                     <ng-container *ngSwitchDefault>
-                        <mat-form-field class="example-full-width">
+                        <mat-form-field class="w-full">
                             <mat-label>{{_ctrl.name}}</mat-label>
-                            <input matInput [placeholder]="_ctrl.name" [formControlName]="_ctrl.key" name="email"
+                            <input matInput [placeholder]="_ctrl.name" [formControlName]="_ctrl.key" [name]="_ctrl.key"
                                 [type]="_ctrl.type">
                         </mat-form-field>
                         <mat-error *ngIf="_ctrl.control?.errors">
@@ -39,7 +36,7 @@
                     </ng-container>
                 </ng-container>
             </div>
-            <app-resuable-button [isDisabled]="produitForm.invalid" [isSubmit]="true" [btnText]="'CONNEXION'"
+            <app-resuable-button [isDisabled]="produitForm.invalid" [isSubmit]="true" [btnText]="'Ajouter'"
                 [isPrincipal]="true" />
         </form>
     </div>
