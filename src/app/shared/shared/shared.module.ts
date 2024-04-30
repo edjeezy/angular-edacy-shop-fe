@@ -7,11 +7,15 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {MatMenuModule} from '@angular/material/menu';
 import { HttpClientModule } from '@angular/common/http';
 import {MatSelectModule} from '@angular/material/select';
+import {MatTableModule} from '@angular/material/table';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 const MAT_COMPONENTS = [
   MatInputModule,
   MatMenuModule,
   MatSelectModule,
+  MatTableModule,
+  MatSnackBarModule,
 ]
 
 @NgModule({

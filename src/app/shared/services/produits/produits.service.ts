@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, catchError, combineLatest, first, from, interval, map, of, retry, switchMap, take, tap } from 'rxjs';
 import { SimpleProduct } from '../../interfaces/produit';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +21,8 @@ export class ProduitsService {
     take(1)
   );
   constructor(
-    private httpClient: HttpClient
+    private httpClient: HttpClient,
+    private matSnackbar: MatSnackBar
   ) { }
 
   getAllProducts(): Observable<any[]> {
@@ -29,10 +31,39 @@ export class ProduitsService {
       first(),
       retry(3),
       catchError((error) => {
-        console.log(error);
+        this.handleError(error);
         return of([]);
       })
     );
+  }
+
+  getProductById(id: string) {
+    return this.httpClient.get<SimpleProduct>(this.url + '/' + id).pipe(
+      tap(produits => console.log(produits)),
+      first(),
+      retry(3),
+      catchError((error) => {
+        this.handleError(error);
+        return of(null);
+      })
+    );
+  }
+  
+  patchProduct(id: string, product: any) {
+    return this.httpClient.patch(this.url + '/' + id, product).pipe(
+      tap(console.log),
+      catchError((error) => {
+        this.handleError(error);
+        return of(null);
+      })
+    )
+  }
+
+  deleteProduct(id: string) {
+    return this.httpClient.delete(this.url + '/' + id).pipe(
+      tap(produits => console.log(produits)),
+      first(),
+    )
   }
 
   getMyService() {
@@ -51,5 +82,10 @@ export class ProduitsService {
       const prod = data[0]
       const services = data[1];
     })
+  }
+
+  private handleError(error: any) {
+    console.error(error);
+    this.matSnackbar.open("Erreur! " + error?.message + " " + error?.status);
   }
 }

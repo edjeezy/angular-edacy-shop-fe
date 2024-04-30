@@ -2,7 +2,7 @@
 
 </div>
 
-<app-resuable-button  [btnText]="'DECONNEXION'" (buttonClicked)="logout()" />
+<app-reusable-button  [btnText]="'DECONNEXION'" (buttonClicked)="logout()" />
 
 <!--   <app-search [placeholderMessage]="message" (searched)="filtrerProduits($event)">
 </app-search> -->
@@ -22,14 +22,14 @@
         <span class="product-card-price">
           {{ prd.price }} CFA
         </span>
-        <app-resuable-button [isPrincipal]="true" (buttonClicked)="addToCart(prd)">
+        <app-reusable-button [isPrincipal]="true" (buttonClicked)="addToCart(prd)">
           <div class="left">
             top
           </div>
           <div class="right">
             bottom
           </div>
-        </app-resuable-button>
+        </app-reusable-button>
       </div>
     </div>
 </div>

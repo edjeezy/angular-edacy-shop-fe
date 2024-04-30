@@ -5,10 +5,10 @@ import { RouterModule } from '@angular/router';
 import { SharedModule } from '../../shared/shared/shared.module';
 import { AdminFormComponent } from './components/admin-form/admin-form.component';
 import { GestionProduitsComponent } from './gestion-produits/gestion-produits.component';
-import {MatSidenavModule} from '@angular/material/sidenav';
-import {MatListModule} from '@angular/material/list';
 import { GestionServicesComponent } from './gestion-services/gestion-services.component';
 import { GestionCommandesComponent } from './gestion-commandes/gestion-commandes.component';
+import { ListeProduitsComponent } from './gestion-produits/pages/liste-produits/liste-produits.component';
+import { DetailsProduitsComponent } from './gestion-produits/pages/details-produits/details-produits.component';
 
 @NgModule({
   declarations: [
@@ -16,12 +16,12 @@ import { GestionCommandesComponent } from './gestion-commandes/gestion-commandes
      AdminFormComponent, 
      GestionProduitsComponent, 
      GestionServicesComponent,
-     GestionCommandesComponent],
+     GestionCommandesComponent,
+     ListeProduitsComponent,
+     DetailsProduitsComponent],
   imports: [
     CommonModule,
     SharedModule,
-    MatSidenavModule,
-    MatListModule,
     RouterModule.forChild([
 
       {
@@ -42,6 +42,21 @@ import { GestionCommandesComponent } from './gestion-commandes/gestion-commandes
           {
             path: 'produits',
             component: GestionProduitsComponent,
+            children: [
+              {
+                path: '',
+                redirectTo: 'liste',
+                pathMatch: 'full',
+              },
+              {
+                path: 'liste',
+                component: ListeProduitsComponent,
+              },
+              {
+                path: 'details/:id',
+                component: DetailsProduitsComponent,
+              }
+            ],
           },
           {
             path: 'services',

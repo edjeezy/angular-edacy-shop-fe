@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { tap } from 'rxjs';
 import { SimpleProduct } from '../../../../shared/interfaces/produit';
 import { AuthService } from '../../../../shared/services/auth.service';
 import { ProduitsService } from '../../../../shared/services/produits/produits.service';
 import { phoneNumberValidator } from '../../../../shared/validators/senegal-phone';
+import { Router } from '@angular/router';
 
 
 
@@ -27,6 +28,7 @@ interface FormOptions {
   styleUrl: './admin-form.component.css'
 })
 export class AdminFormComponent implements OnInit {
+  @Input() data!: SimpleProduct;
   produitForm = new FormGroup({
     name: new FormControl('', [Validators.required]),
     description: new FormControl(''),
@@ -37,6 +39,7 @@ export class AdminFormComponent implements OnInit {
     promoVal: new FormControl(''),
     sellerPhone: new FormControl('', [Validators.required, phoneNumberValidator(/^(221|00221|\+221)?(77|78|75|70|76)[0-9]{7}$/)]),
   });
+  
   formMaker: FormMaker[] = [
     { name: 'Nom du produit', key: 'name', type: 'text',  control: this.produitForm.get('name') as FormControl},
     { name: 'Description du produit', key: 'description', type: 'text',  control: this.produitForm.get('description') as FormControl},
@@ -48,7 +51,7 @@ export class AdminFormComponent implements OnInit {
     { name: 'Numero de telephone du vendeur', key: 'sellerPhone',  type: 'text', control: this.produitForm.get('sellerPhone') as FormControl},
   ];
 
-  categories: FormOptions[] = [
+   categories: FormOptions[] = [
     {
       name: 'Sac',
       value: 1,
@@ -92,7 +95,8 @@ export class AdminFormComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private prodService: ProduitsService,
-    public fb : FormBuilder
+    public fb : FormBuilder,
+    private router: Router
   ) {
   }
 
@@ -112,19 +116,7 @@ export class AdminFormComponent implements OnInit {
   }
 
   private initForm() {
-    setTimeout(() => {
-      const produit: SimpleProduct = {
-          id: "f63bbdb4-d9bb-48c4-9a56-85656c114a8f",
-          name: "Incredible Soft Table",
-          description: "The beautiful range of Apple Naturalé that has an exciting mix of natural ingredients. With the Goodness of 100% Natural Ingredients",
-          image: "https://loremflickr.com/640/480/shoes?lock=6520560058105856",
-          price: "76.00",
-          category: 1,
-          promo: true,
-          promoVal: 20,
-          sellerPhone: '00221776771211'
-      };
-
+      const produit: SimpleProduct = this.data;
       this.produitForm.get('name')?.setValue(produit.name);
       this.produitForm.get('description')?.setValue(produit.description);
       this.produitForm.get('image')?.setValue(produit.image);
@@ -134,7 +126,7 @@ export class AdminFormComponent implements OnInit {
       this.produitForm.get('promo')?.setValue(produit.promo, {emitEvent: false});
       this.produitForm.get('promoVal')?.setValue(produit.promoVal as string);
       this.produitForm.get('sellerPhone')?.setValue(produit.sellerPhone as string);
-    }, 2000)
+
   }
 
   getCategories(ctrl: FormMaker): FormOptions[] {
@@ -156,9 +148,10 @@ export class AdminFormComponent implements OnInit {
   }
 
   ajouterUnProduit() {
-    console.log(
-      this.produitForm.value
-    );
+    this.prodService.patchProduct(this.data.id, this.produitForm.value).subscribe(() => {
+      alert('Success');
+      this.router.navigate(['/admin/admin-page/produits/liste']);
+    });
   }
   
   promoChanged(ev: string | number | boolean, ctrl: FormMaker) {
