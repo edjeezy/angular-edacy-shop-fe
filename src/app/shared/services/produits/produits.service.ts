@@ -1,8 +1,13 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, catchError, combineLatest, first, from, interval, map, of, retry, switchMap, take, tap } from 'rxjs';
 import { SimpleProduct } from '../../interfaces/produit';
 import { MatSnackBar } from '@angular/material/snack-bar';
+
+export interface PaginationOptions {
+  pageSize: number;
+  pageNumber: number;
+}
 
 @Injectable({
   providedIn: 'root'
@@ -24,6 +29,24 @@ export class ProduitsService {
     private httpClient: HttpClient,
     private matSnackbar: MatSnackBar
   ) { }
+
+  getPaginatedProducts(options?: PaginationOptions): Observable<SimpleProduct[]> {
+    let params = new HttpParams();
+    if (options) {
+      params = params.set('_page', options.pageNumber.toString());
+      params = params.set('_limit', options.pageSize.toString());
+    }
+
+    return this.httpClient.get<SimpleProduct[]>(this.url, {params}).pipe(
+      tap(produits => console.log(produits)),
+      first(),
+      retry(3),
+      catchError((error) => {
+        this.handleError(error);
+        return of([]);
+      })
+    );
+  }
 
   getAllProducts(): Observable<any[]> {
     return this.httpClient.get<SimpleProduct[]>(this.url).pipe(

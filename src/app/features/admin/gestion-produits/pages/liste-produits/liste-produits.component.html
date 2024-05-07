@@ -1,40 +1,44 @@
-<table mat-table [dataSource]="produits" class="mat-elevation-z8">
+  <ng-container *ngIf="produits | async as prod">
 
-    <!--- Note that these columns can be defined in any order.
-          The actual rendered columns are set as a property on the row definition" -->
+    <table mat-table [dataSource]="prod" class="mat-elevation-z8">
   
-    <!-- Position Column -->
-    <ng-container matColumnDef="name">
-      <th mat-header-cell *matHeaderCellDef> Nom Produit </th>
-      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
-    </ng-container>
-  
-    <!-- Name Column -->
-    <ng-container matColumnDef="category">
-      <th mat-header-cell *matHeaderCellDef> Categuorie </th>
-      <td mat-cell *matCellDef="let element"> {{element.category}} </td>
-    </ng-container>
-  
-    <!-- Weight Column -->
-    <ng-container matColumnDef="price">
-      <th mat-header-cell *matHeaderCellDef> Prix </th>
-      <td mat-cell *matCellDef="let element"> {{element.price}} </td>
-    </ng-container>
-  
-    <!-- Symbol Column -->
-    <ng-container matColumnDef="promoVal">
-      <th mat-header-cell *matHeaderCellDef> Promo </th>
-      <td mat-cell *matCellDef="let element"> {{element.promoVal}} </td>
-    </ng-container>
-
-      <ng-container matColumnDef="actions">
-        <th mat-header-cell *matHeaderCellDef> Actions </th>
-        <td mat-cell *matCellDef="let element">
-            <app-reusable-button (buttonClicked)="handleEdit(element)" [btnText]="'Editer'" />
-            <app-reusable-button (buttonClicked)="handleDelete(element)"  [btnText]="'Supprimer'" />
-        </td>
+      <!--- Note that these columns can be defined in any order.
+            The actual rendered columns are set as a property on the row definition" -->
+    
+      <!-- Position Column -->
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef> Nom Produit </th>
+        <td mat-cell *matCellDef="let element"> {{element.name}} </td>
       </ng-container>
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-  </table>
+    
+      <!-- Name Column -->
+      <ng-container matColumnDef="category">
+        <th mat-header-cell *matHeaderCellDef> Categuorie </th>
+        <td mat-cell *matCellDef="let element"> {{element.category}} </td>
+      </ng-container>
+    
+      <!-- Weight Column -->
+      <ng-container matColumnDef="price">
+        <th mat-header-cell *matHeaderCellDef> Prix </th>
+        <td mat-cell *matCellDef="let element"> {{element.price}} </td>
+      </ng-container>
+    
+      <!-- Symbol Column -->
+      <ng-container matColumnDef="promoVal">
+        <th mat-header-cell *matHeaderCellDef> Promo </th>
+        <td mat-cell *matCellDef="let element"> {{element.promoVal}} </td>
+      </ng-container>
   
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef> Actions </th>
+          <td mat-cell *matCellDef="let element">
+              <app-reusable-button (buttonClicked)="handleEdit(element)" [btnText]="'Editer'" />
+              <app-reusable-button (buttonClicked)="handleDelete(element)"  [btnText]="'Supprimer'" />
+          </td>
+        </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </ng-container>
+  
+  <mat-paginator [length]="1000" [pageSize]="5" [pageSizeOptions]="pageSizeOptions" (page)="onPageChange($event)"></mat-paginator>

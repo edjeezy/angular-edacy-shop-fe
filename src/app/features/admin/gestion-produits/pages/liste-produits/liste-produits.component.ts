@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ProduitsService } from '../../../../../shared/services/produits/produits.service';
+import { PaginationOptions, ProduitsService } from '../../../../../shared/services/produits/produits.service';
 import { SimpleProduct } from '../../../../../shared/interfaces/produit';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-liste-produits',
@@ -11,7 +12,9 @@ import { Router } from '@angular/router';
 export class ListeProduitsComponent implements OnInit {
   displayedColumns: string[] = ['name', 'category', 'price', 'promoVal', 'actions'];
   dataSource = [];
-  produits!: SimpleProduct[];
+  produits!: Observable<SimpleProduct[]>;
+  pageSizeOptions = [5, 10, 20, 50];
+  currentPage: number = 1;
 
   constructor(public produitsService: ProduitsService, private router: Router) {
 
@@ -22,11 +25,20 @@ export class ListeProduitsComponent implements OnInit {
   }
 
   init() {
-    this.produitsService.getAllProducts().subscribe((data) => {
-      this.produits = data;
-      console.log(data)
-    });
+   this.produits = this.produitsService.getPaginatedProducts({pageSize: 5, pageNumber: 1});
   }
+
+  onPageChange(event: any) {
+    console.log('page change', event);
+    
+    this.currentPage = event.pageIndex + 1; // Page index starts from 0
+    this.fetchData({ pageSize: event.pageSize, pageNumber: event.pageIndex });
+  }
+
+  fetchData(opts: PaginationOptions) {
+    this.produits = this.produitsService.getPaginatedProducts(opts);
+  }
+
 
   async handleEdit(el: SimpleProduct) {
     await this.router.navigate(['/admin/admin-page/produits/details', el.id])
