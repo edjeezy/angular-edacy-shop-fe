@@ -125,6 +125,7 @@ export class AdminFormComponent implements OnInit {
   }
 
   private initForm() {
+    if (this.data) {      
       const produit: SimpleProduct = this.data;
       this.produitForm.get('name')?.setValue(produit.name);
       this.produitForm.get('description')?.setValue(produit.description);
@@ -136,6 +137,7 @@ export class AdminFormComponent implements OnInit {
       this.produitForm.get('promo')?.setValue(produit.promo, {emitEvent: false});
       this.produitForm.get('promoVal')?.setValue(produit.promoVal as string);
       this.produitForm.get('sellerPhone')?.setValue(produit.sellerPhone as string);
+    }
 
   }
 
@@ -158,10 +160,17 @@ export class AdminFormComponent implements OnInit {
   }
 
   ajouterUnProduit() {
-    this.prodService.patchProduct(this.data.id, this.produitForm.value).subscribe(() => {
-      alert('Success');
-      this.router.navigate(['/admin/admin-page/produits/liste']);
-    });
+    if (this.data?.id) {      
+      this.prodService.patchProduct(this.data.id, this.produitForm.value).subscribe(() => {
+        alert('Success');
+        this.router.navigate(['/admin/admin-page/produits/liste']);
+      });
+    } else {
+      this.prodService.postProduct(this.produitForm.value as SimpleProduct).subscribe(() => {
+        alert('Success');
+        this.router.navigate(['/admin/admin-page/produits/liste']);
+      });
+    }
   }
   
   promoChanged(ev: string | number | boolean, ctrl: FormMaker) {

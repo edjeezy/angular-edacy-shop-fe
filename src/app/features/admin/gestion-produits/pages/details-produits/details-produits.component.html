@@ -1,7 +1,3 @@
-<ng-container *ngIf="currentProduct;else chargement">
+<ng-container>
     <app-admin-form [data]="currentProduct" ></app-admin-form>
 </ng-container>
-
-<ng-template #chargement>
-    Chargement en cours
-</ng-template>

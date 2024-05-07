@@ -71,6 +71,16 @@ export class ProduitsService {
       })
     );
   }
+
+  postProduct(product: SimpleProduct) {
+    return this.httpClient.post(this.url, product).pipe(
+      tap(console.log),
+      catchError((error) => {
+        this.handleError(error);
+        return of(null);
+      })
+    )
+  }
   
   patchProduct(id: string, product: any) {
     return this.httpClient.patch(this.url + '/' + id, product).pipe(

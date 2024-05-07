@@ -14,7 +14,7 @@ export class ListeProduitsComponent implements OnInit {
   dataSource = [];
   produits!: Observable<SimpleProduct[]>;
   pageSizeOptions = [5, 10, 20, 50];
-  currentPage: number = 1;
+  currentPage: number = 0;
 
   constructor(public produitsService: ProduitsService, private router: Router) {
 
@@ -39,6 +39,9 @@ export class ListeProduitsComponent implements OnInit {
     this.produits = this.produitsService.getPaginatedProducts(opts);
   }
 
+  async create() {
+    await this.router.navigate(['/admin/admin-page/produits/create']);
+  }
 
   async handleEdit(el: SimpleProduct) {
     await this.router.navigate(['/admin/admin-page/produits/details', el.id])

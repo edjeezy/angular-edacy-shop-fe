@@ -57,6 +57,10 @@ import { FileUploadComponent } from './components/file-upload/file-upload.compon
               {
                 path: 'details/:id',
                 component: DetailsProduitsComponent,
+              },
+              {
+                path: 'create',
+                component: DetailsProduitsComponent,
               }
             ],
           },

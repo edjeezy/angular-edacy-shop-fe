@@ -20,7 +20,9 @@ export class DetailsProduitsComponent implements OnInit {
   ngOnInit(): void {
     this.route.paramMap.subscribe((map) => {
       this.currentId = map.get('id') as string;
-      this.init(this.currentId);
+      if (this.currentId) {
+        this.init(this.currentId);
+      }
     });
   }
 
