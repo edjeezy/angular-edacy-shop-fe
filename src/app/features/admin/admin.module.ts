@@ -9,6 +9,7 @@ import { GestionServicesComponent } from './gestion-services/gestion-services.co
 import { GestionCommandesComponent } from './gestion-commandes/gestion-commandes.component';
 import { ListeProduitsComponent } from './gestion-produits/pages/liste-produits/liste-produits.component';
 import { DetailsProduitsComponent } from './gestion-produits/pages/details-produits/details-produits.component';
+import { FileUploadComponent } from './components/file-upload/file-upload.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { DetailsProduitsComponent } from './gestion-produits/pages/details-produ
      GestionServicesComponent,
      GestionCommandesComponent,
      ListeProduitsComponent,
-     DetailsProduitsComponent],
+     DetailsProduitsComponent,
+     FileUploadComponent],
   imports: [
     CommonModule,
     SharedModule,

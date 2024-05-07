@@ -13,6 +13,9 @@
                                 </mat-select>
                               </mat-form-field>
                     </ng-container>
+                    <ng-container *ngSwitchCase="'img'">
+                        <app-file-upload [control]="_ctrl.control" [previewUrl]="previewUrl" (uploaded)="onUpload($event)" ></app-file-upload>
+                    </ng-container>
                     <ng-container *ngSwitchDefault>
                         <mat-form-field class="w-full">
                             <mat-label>{{_ctrl.name}}</mat-label>
@@ -29,6 +32,8 @@
                         </mat-error>
                     </ng-container>
                 </ng-container>
+
+                
             </div>
             <app-reusable-button [isDisabled]="produitForm.invalid" [isSubmit]="true" [btnText]="'Ajouter'"
                 [isPrincipal]="true" />

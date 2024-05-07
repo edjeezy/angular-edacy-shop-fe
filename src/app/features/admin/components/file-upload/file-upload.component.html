@@ -1,0 +1,7 @@
+<div class="py-4 ">
+    <label class="block" for="file-upload"> 
+        Image du produit
+    </label>
+    <input name="file-upload" type="file" accept="image/*" (change)="onFileSelected($event)">
+    <img *ngIf="previewUrl" [src]="previewUrl" alt="Image preview">
+</div>

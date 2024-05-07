@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
 interface FormMaker {
   name: string, 
   key: string,
-  type: 'text' | 'select' | 'calendar',  
+  type: 'text' | 'select' | 'calendar' | 'img',  
   control: FormControl
 }
 
@@ -43,7 +43,7 @@ export class AdminFormComponent implements OnInit {
   formMaker: FormMaker[] = [
     { name: 'Nom du produit', key: 'name', type: 'text',  control: this.produitForm.get('name') as FormControl},
     { name: 'Description du produit', key: 'description', type: 'text',  control: this.produitForm.get('description') as FormControl},
-    { name: 'Image du produit', key: 'image',  type: 'text', control: this.produitForm.get('image') as FormControl},
+    { name: 'Image du produit', key: 'image',  type: 'img', control: this.produitForm.get('image') as FormControl},
     { name: 'Prix du produit', key: 'price',  type: 'text', control: this.produitForm.get('price') as FormControl},
     { name: 'Categuorie du produit', key: 'category', type: 'select',  control: this.produitForm.get('category') as FormControl},
     { name: 'Promo du produit', key: 'promo', type: 'select',  control: this.produitForm.get('promo') as FormControl},
@@ -92,6 +92,8 @@ export class AdminFormComponent implements OnInit {
     },
   ]
 
+  previewUrl: string | null = null;
+
   constructor(
     private authService: AuthService,
     private prodService: ProduitsService,
@@ -104,6 +106,9 @@ export class AdminFormComponent implements OnInit {
     return this.produitForm.get('promoVal') as FormControl;
   }
   
+  getControl(key: string) {
+    return this.produitForm.get(key) as FormControl;
+  } 
 
   ngOnInit(): void {
     // Methode reactive
@@ -115,11 +120,16 @@ export class AdminFormComponent implements OnInit {
       this.initForm();
   }
 
+  onUpload(ev: any) {
+    console.log('image', ev);
+  }
+
   private initForm() {
       const produit: SimpleProduct = this.data;
       this.produitForm.get('name')?.setValue(produit.name);
       this.produitForm.get('description')?.setValue(produit.description);
       this.produitForm.get('image')?.setValue(produit.image);
+      this.previewUrl = produit.image;
       this.produitForm.get('price')?.setValue(produit.price as string);
       this.produitForm.get('category')?.setValue(produit.category as string);
       // Eviter d'emmettre un evenement
