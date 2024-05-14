@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SimpleProduct } from '../../../../../shared/interfaces/produit';
-import { ProduitsService } from '../../../../../shared/services/produits/produits.service';
 import { Observable, delay, firstValueFrom } from 'rxjs';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { phoneNumberValidator } from '../../../../../shared/validators/senegal-phone';
 import { FormMaker } from '../../../components/admin-form/admin-form.component';
+import { CrudService } from '../../../../../shared/services/crud/crud.service';
 
 @Component({
   selector: 'app-details-produits',
@@ -38,9 +38,10 @@ export class DetailsProduitsComponent implements OnInit {
   
   currentId!: string | null;
   currentProduct!: Observable<SimpleProduct | null>;
+  endpoint = "produits";
   constructor(
     private route: ActivatedRoute,
-    private prodService: ProduitsService, 
+    private prodService: CrudService, 
     private router: Router
   ) {}
 
@@ -54,19 +55,18 @@ export class DetailsProduitsComponent implements OnInit {
   }
 
   private async init(id: string) {
-    this.currentProduct = this.prodService.getProductById(id)
-
+    this.currentProduct = this.prodService.getById(this.endpoint, id);
   }
 
 
   save(savedEvent: { form: SimpleProduct, isEdit: boolean }) {
     if (savedEvent.isEdit) {      
-      this.prodService.patchProduct(this.currentId as string, savedEvent.form).subscribe(() => {
+      this.prodService.patch( this.endpoint, this.currentId as string, savedEvent.form).subscribe(() => {
         alert('Success');
         this.router.navigate(['/admin/admin-page/produits/liste']);
       });
     } else {
-      this.prodService.postProduct(savedEvent.form).subscribe(() => {
+      this.prodService.post(this.endpoint, savedEvent.form).subscribe(() => {
         alert('Success');
         this.router.navigate(['/admin/admin-page/produits/liste']);
       });

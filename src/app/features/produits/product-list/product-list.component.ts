@@ -2,8 +2,8 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AuthService } from '../../../shared/services/auth.service';
 import { Observable, Subject, Subscription, first, from, lastValueFrom, take, takeUntil, tap } from 'rxjs';
 import { SimpleProduct } from '../../../shared/interfaces/produit';
-import { createProducts } from '../../../shared/donnees/produit.generator';
-import { ProduitsService } from '../../../shared/services/produits/produits.service';
+
+import { CrudService } from '../../../shared/services/crud/crud.service';
 
 @Component({
   selector: 'app-product-list',
@@ -15,7 +15,7 @@ export class ProductListComponent implements OnInit, OnDestroy {
   destroy$ = new Subject();
   constructor(
     private authervice: AuthService,
-    private productService: ProduitsService
+    private crud: CrudService
   ) {}
 
 
@@ -34,7 +34,7 @@ export class ProductListComponent implements OnInit, OnDestroy {
       this.produits = p;
     }); */
 
-    this.productService.reactiveInterval$
+/*     this.productService.reactiveInterval$
     .pipe(
       takeUntil(this.destroy$)
     )
@@ -46,7 +46,7 @@ export class ProductListComponent implements OnInit, OnDestroy {
       takeUntil(this.destroy$),
       tap((x) => console.log('status', x))
     ).subscribe();
-
+ */
     //this.productService.getMyService().subscribe()
   }
 
@@ -62,7 +62,7 @@ export class ProductListComponent implements OnInit, OnDestroy {
   async getProds() {
     try {
       this.produits = await lastValueFrom(
-        this.productService.getAllProducts()
+        this.crud.getAll('produits')
        .pipe(
          // Garder jusqua
          takeUntil(this.destroy$),

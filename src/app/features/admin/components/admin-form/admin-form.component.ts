@@ -3,7 +3,6 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { tap } from 'rxjs';
 import { SimpleProduct } from '../../../../shared/interfaces/produit';
 import { AuthService } from '../../../../shared/services/auth.service';
-import { ProduitsService } from '../../../../shared/services/produits/produits.service';
 import { phoneNumberValidator } from '../../../../shared/validators/senegal-phone';
 import { Router } from '@angular/router';
 
@@ -77,20 +76,11 @@ export class AdminFormComponent implements OnInit {
 
   constructor(
     private authService: AuthService,
-    private prodService: ProduitsService,
     public fb : FormBuilder,
     private router: Router
   ) {
   }
-
-  get promoVal() {
-    return this.form.get('promoVal') as FormControl;
-  }
   
-  getControl(key: string) {
-    return this.form.get(key) as FormControl;
-  } 
-
   ngOnInit(): void {
     // Methode reactive
       const promo = this.form.get('promo') as FormControl;
@@ -101,6 +91,14 @@ export class AdminFormComponent implements OnInit {
       this.initForm();
   }
 
+  get promoVal() {
+    return this.form.get('promoVal') as FormControl;
+  }
+  
+  getControl(key: string) {
+    return this.form.get(key) as FormControl;
+  } 
+
   onUpload(ev: any) {
     console.log('image', ev);
   }
@@ -108,16 +106,11 @@ export class AdminFormComponent implements OnInit {
   private initForm() {
     console.log('data', this.data);
     
-    if (this.data) {      
+    if (this.data) {
       for (const ctrl of this.formMaker) {
-        console.log(ctrl);
-        console.log(this.data?.[ctrl.key]);
-        
         ctrl.control?.setValue(this.data?.[ctrl.key])
       }
-
     }
-
   }
 
   getCategories(ctrl: FormMaker): FormOptions[] {

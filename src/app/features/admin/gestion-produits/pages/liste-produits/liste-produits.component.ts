@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { PaginationOptions, ProduitsService } from '../../../../../shared/services/produits/produits.service';
 import { SimpleProduct } from '../../../../../shared/interfaces/produit';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { CrudService, PaginationOptions } from '../../../../../shared/services/crud/crud.service';
 
 @Component({
   selector: 'app-liste-produits',
@@ -15,8 +15,8 @@ export class ListeProduitsComponent implements OnInit {
   produits!: Observable<SimpleProduct[]>;
   pageSizeOptions = [5, 10, 20, 50];
   currentPage: number = 0;
-
-  constructor(public produitsService: ProduitsService, private router: Router) {
+  endpoint = "produits";
+  constructor(public produitsService: CrudService, private router: Router) {
 
   }
   
@@ -25,7 +25,7 @@ export class ListeProduitsComponent implements OnInit {
   }
 
   init() {
-   this.produits = this.produitsService.getPaginatedProducts({pageSize: 5, pageNumber: 1});
+   this.produits = this.produitsService.getPaginated(this.endpoint, {pageSize: 5, pageNumber: 1});
   }
 
   onPageChange(event: any) {
@@ -36,7 +36,7 @@ export class ListeProduitsComponent implements OnInit {
   }
 
   fetchData(opts: PaginationOptions) {
-    this.produits = this.produitsService.getPaginatedProducts(opts);
+    this.produits = this.produitsService.getPaginated(this.endpoint, opts);
   }
 
   async create() {
@@ -50,7 +50,7 @@ export class ListeProduitsComponent implements OnInit {
   handleDelete(el: SimpleProduct) {
     const conf = confirm('Etes vous sur? Operation non reversible...');
     if (conf) {
-      this.produitsService.deleteProduct(el.id)
+      this.produitsService.delete( this.endpoint, el.id)
       .subscribe(() => this.init())
     }
   }
