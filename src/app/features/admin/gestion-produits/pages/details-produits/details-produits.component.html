@@ -1,3 +1,5 @@
-<ng-container>
-    <app-admin-form [data]="currentProduct" ></app-admin-form>
+<ng-container *ngIf="currentId;">
+    <ng-container *ngIf="currentProduct | async as cp">
+        <app-admin-form [data]="cp" [form]="produitForm" [formMaker]="formMaker" ></app-admin-form>
+    </ng-container>
 </ng-container>

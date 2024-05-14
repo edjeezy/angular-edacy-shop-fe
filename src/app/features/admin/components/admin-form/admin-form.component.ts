@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { tap } from 'rxjs';
 import { SimpleProduct } from '../../../../shared/interfaces/produit';
@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 
 
 
-interface FormMaker {
+export interface FormMaker {
   name: string, 
   key: string,
   type: 'text' | 'select' | 'calendar' | 'img',  
@@ -17,7 +17,7 @@ interface FormMaker {
 }
 
 
-interface FormOptions {
+export interface FormOptions {
   name: string,
   value: string | number | boolean,
 }
@@ -28,29 +28,10 @@ interface FormOptions {
   styleUrl: './admin-form.component.css'
 })
 export class AdminFormComponent implements OnInit {
-  @Input() data!: SimpleProduct;
-  produitForm = new FormGroup({
-    name: new FormControl('', [Validators.required]),
-    description: new FormControl(''),
-    image: new FormControl('', [Validators.required]),
-    price: new FormControl('', [Validators.required]),
-    category: new FormControl('', [Validators.required]),
-    promo: new FormControl(),
-    promoVal: new FormControl(''),
-    sellerPhone: new FormControl('', [Validators.required, phoneNumberValidator(/^(221|00221|\+221)?(77|78|75|70|76)[0-9]{7}$/)]),
-  });
-  
-  formMaker: FormMaker[] = [
-    { name: 'Nom du produit', key: 'name', type: 'text',  control: this.produitForm.get('name') as FormControl},
-    { name: 'Description du produit', key: 'description', type: 'text',  control: this.produitForm.get('description') as FormControl},
-    { name: 'Image du produit', key: 'image',  type: 'img', control: this.produitForm.get('image') as FormControl},
-    { name: 'Prix du produit', key: 'price',  type: 'text', control: this.produitForm.get('price') as FormControl},
-    { name: 'Categuorie du produit', key: 'category', type: 'select',  control: this.produitForm.get('category') as FormControl},
-    { name: 'Promo du produit', key: 'promo', type: 'select',  control: this.produitForm.get('promo') as FormControl},
-    { name: 'Valeur Promo du produit', key: 'promoVal', type: 'select',  control: this.produitForm.get('promoVal') as FormControl},
-    { name: 'Numero de telephone du vendeur', key: 'sellerPhone',  type: 'text', control: this.produitForm.get('sellerPhone') as FormControl},
-  ];
-
+  @Input() data!: any;
+  @Input() form!: FormGroup;
+  @Input() formMaker!: FormMaker[];
+  @Output() saveClicked = new EventEmitter();
    categories: FormOptions[] = [
     {
       name: 'Sac',
@@ -103,16 +84,16 @@ export class AdminFormComponent implements OnInit {
   }
 
   get promoVal() {
-    return this.produitForm.get('promoVal') as FormControl;
+    return this.form.get('promoVal') as FormControl;
   }
   
   getControl(key: string) {
-    return this.produitForm.get(key) as FormControl;
+    return this.form.get(key) as FormControl;
   } 
 
   ngOnInit(): void {
     // Methode reactive
-      const promo = this.produitForm.get('promo') as FormControl;
+      const promo = this.form.get('promo') as FormControl;
       promo.valueChanges.pipe(
         tap(console.log)
       ).subscribe();
@@ -125,18 +106,16 @@ export class AdminFormComponent implements OnInit {
   }
 
   private initForm() {
+    console.log('data', this.data);
+    
     if (this.data) {      
-      const produit: SimpleProduct = this.data;
-      this.produitForm.get('name')?.setValue(produit.name);
-      this.produitForm.get('description')?.setValue(produit.description);
-      this.produitForm.get('image')?.setValue(produit.image);
-      this.previewUrl = produit.image;
-      this.produitForm.get('price')?.setValue(produit.price as string);
-      this.produitForm.get('category')?.setValue(produit.category as string);
-      // Eviter d'emmettre un evenement
-      this.produitForm.get('promo')?.setValue(produit.promo, {emitEvent: false});
-      this.produitForm.get('promoVal')?.setValue(produit.promoVal as string);
-      this.produitForm.get('sellerPhone')?.setValue(produit.sellerPhone as string);
+      for (const ctrl of this.formMaker) {
+        console.log(ctrl);
+        console.log(this.data?.[ctrl.key]);
+        
+        ctrl.control?.setValue(this.data?.[ctrl.key])
+      }
+
     }
 
   }
@@ -160,27 +139,20 @@ export class AdminFormComponent implements OnInit {
   }
 
   ajouterUnProduit() {
-    if (this.data?.id) {      
-      this.prodService.patchProduct(this.data.id, this.produitForm.value).subscribe(() => {
-        alert('Success');
-        this.router.navigate(['/admin/admin-page/produits/liste']);
-      });
-    } else {
-      this.prodService.postProduct(this.produitForm.value as SimpleProduct).subscribe(() => {
-        alert('Success');
-        this.router.navigate(['/admin/admin-page/produits/liste']);
-      });
-    }
+    this.saveClicked.emit({
+      form: this.form.value, 
+      isEdit: this.data
+    })
   }
   
   promoChanged(ev: string | number | boolean, ctrl: FormMaker) {
     if (ctrl.key === 'promo' ) {
       const value = ev as boolean;
       if(!value) {
-        this.produitForm.get('promoVal')?.disable();
-        this.produitForm.get('promoVal')?.reset();
+        this.form.get('promoVal')?.disable();
+        this.form.get('promoVal')?.reset();
       } else {
-        this.produitForm.get('promoVal')?.enable();
+        this.form.get('promoVal')?.enable();
       }
     }
   }
