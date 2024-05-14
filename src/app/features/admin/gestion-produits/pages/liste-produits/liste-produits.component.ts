@@ -10,7 +10,7 @@ import { CrudService, PaginationOptions } from '../../../../../shared/services/c
   styleUrl: './liste-produits.component.css'
 })
 export class ListeProduitsComponent implements OnInit {
-  displayedColumns: string[] = ['name', 'category', 'price', 'promoVal', 'actions'];
+  displayedColumns: string[] = ['category', 'name',  'price', 'promoVal', 'actions'];
   dataSource = [];
   produits!: Observable<SimpleProduct[]>;
   pageSizeOptions = [5, 10, 20, 50];

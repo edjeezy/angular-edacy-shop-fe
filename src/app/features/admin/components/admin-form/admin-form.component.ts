@@ -83,10 +83,12 @@ export class AdminFormComponent implements OnInit {
   
   ngOnInit(): void {
     // Methode reactive
+    if (this.form.get('promo')) {      
       const promo = this.form.get('promo') as FormControl;
       promo.valueChanges.pipe(
         tap(console.log)
       ).subscribe();
+    }
 
       this.initForm();
   }

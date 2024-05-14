@@ -1,0 +1,11 @@
+<h2 mat-dialog-title> {{data.title}} </h2>
+<mat-dialog-content>
+    <app-admin-form  (saveClicked)="handleSave($event)" [form]="data.form" [formMaker]="data.formMaker" [data]="data.editObject"></app-admin-form>
+</mat-dialog-content>
+<mat-dialog-actions>
+<div class="w-screen flex items-center justify-end gap-2">
+    <!-- Fermeture auto -->
+    <button mat-button mat-dialog-close>Annuler</button>
+
+</div>
+</mat-dialog-actions>

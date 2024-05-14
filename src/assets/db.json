@@ -418,8 +418,24 @@
   ],
   "services": [
     {
-      "name": "Sleek Concrete Shoes",
-      "id": "cf6722dc-ae4b-4375-85a1-81fd9dbadb7d"
+      "id": "9444",
+      "type": "test",
+      "prix": "10"
+    },
+    {
+      "id": "9e4d",
+      "type": "Test xxxx",
+      "prix": "100"
+    },
+    {
+      "id": "8f21",
+      "type": "Test 3",
+      "prix": "1000"
+    },
+    {
+      "id": "ba00",
+      "type": "Livraison a Domicile",
+      "prix": "2000"
     }
   ]
 }

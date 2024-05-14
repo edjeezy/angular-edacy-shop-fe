@@ -10,6 +10,7 @@ import { GestionCommandesComponent } from './gestion-commandes/gestion-commandes
 import { ListeProduitsComponent } from './gestion-produits/pages/liste-produits/liste-produits.component';
 import { DetailsProduitsComponent } from './gestion-produits/pages/details-produits/details-produits.component';
 import { FileUploadComponent } from './components/file-upload/file-upload.component';
+import { ModalWrapperComponent } from './components/modal-wrapper/modal-wrapper.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { FileUploadComponent } from './components/file-upload/file-upload.compon
      GestionCommandesComponent,
      ListeProduitsComponent,
      DetailsProduitsComponent,
-     FileUploadComponent],
+     FileUploadComponent,
+     ModalWrapperComponent],
   imports: [
     CommonModule,
     SharedModule,

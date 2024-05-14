@@ -1,1 +1,41 @@
-<p>gestion-services works!</p>
+  
+  <div class="w-screen flex items-center justify-center py-4">
+    <div class="container">
+      <div class="py-2">
+        <app-reusable-button [btnText]="'CREER'" (buttonClicked)="create()" ></app-reusable-button>
+      </div>
+      <ng-container *ngIf="services | async as services">
+    
+        <table mat-table [dataSource]="services" class="mat-elevation-z8">
+      
+          <!--- Note that these columns can be defined in any order.
+                The actual rendered columns are set as a property on the row definition" -->
+        
+          <!-- Position Column -->
+          <ng-container matColumnDef="type">
+            <th mat-header-cell *matHeaderCellDef> Nom Produit </th>
+            <td mat-cell *matCellDef="let element"> {{element.type}} </td>
+          </ng-container>
+        
+          <!-- Name Column -->
+          <ng-container matColumnDef="prix">
+            <th mat-header-cell *matHeaderCellDef> Categuorie </th>
+            <td mat-cell *matCellDef="let element"> {{element.prix}} </td>
+          </ng-container>
+        
+          <!-- Weight Column -->
+            <ng-container matColumnDef="actions">
+              <th mat-header-cell *matHeaderCellDef> Actions </th>
+              <td mat-cell *matCellDef="let element">
+                  <app-reusable-button [isSecondary]="true" (buttonClicked)="handleEdit(element)" [btnText]="'Editer'" />
+                  <app-reusable-button (buttonClicked)="handleDelete(element)"  [btnText]="'Supprimer'" />
+              </td>
+            </ng-container>
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+      </ng-container>
+      
+      <mat-paginator [length]="1000" [pageSize]="5" [pageSizeOptions]="pageSizeOptions" (page)="onPageChange($event)"></mat-paginator>
+    </div>
+  </div>
