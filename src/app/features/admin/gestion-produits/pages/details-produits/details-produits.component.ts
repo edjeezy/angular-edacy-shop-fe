@@ -6,6 +6,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { phoneNumberValidator } from '../../../../../shared/validators/senegal-phone';
 import { FormMaker } from '../../../components/admin-form/admin-form.component';
 import { CrudService } from '../../../../../shared/services/crud/crud.service';
+import { ENDPOINT } from '../../../../../shared/interfaces/endpoints-enum';
 
 @Component({
   selector: 'app-details-produits',
@@ -38,7 +39,7 @@ export class DetailsProduitsComponent implements OnInit {
   
   currentId!: string | null;
   currentProduct!: Observable<SimpleProduct | null>;
-  endpoint = "produits";
+  endpoint = ENDPOINT.PRODUITS;
   constructor(
     private route: ActivatedRoute,
     private prodService: CrudService, 

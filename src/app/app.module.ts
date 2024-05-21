@@ -6,7 +6,7 @@ import { SharedModule } from './shared/shared/shared.module';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { LoginComponent } from './features/login/login.component';
 import { NotFoundComponent } from './features/not-found/not-found.component';
-import { AdminPageComponent } from './features/admin/admin-page/admin-page.component';
+
 
 @NgModule({
   

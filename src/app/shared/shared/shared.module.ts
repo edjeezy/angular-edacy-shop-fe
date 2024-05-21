@@ -12,6 +12,8 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatDialogModule} from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
+import { HeaderComponent } from '../components/header/header.component';
+import { MatIconModule } from '@angular/material/icon';
 
 const MAT_COMPONENTS = [
   MatInputModule,
@@ -21,13 +23,15 @@ const MAT_COMPONENTS = [
   MatSnackBarModule,
   MatPaginatorModule,
   MatDialogModule,
-  MatButtonModule
+  MatButtonModule,
+  MatIconModule,
 ]
 
 @NgModule({
   declarations: [
     SearchComponent,
     ResuableButtonsComponent,
+    HeaderComponent
   ],
   imports: [
     CommonModule,
@@ -42,6 +46,7 @@ const MAT_COMPONENTS = [
     ResuableButtonsComponent,
     HttpClientModule,
     ReactiveFormsModule,
+    HeaderComponent,
     ...MAT_COMPONENTS
   ],
 })

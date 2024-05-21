@@ -3,6 +3,7 @@ import { SimpleProduct } from '../../../../../shared/interfaces/produit';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { CrudService, PaginationOptions } from '../../../../../shared/services/crud/crud.service';
+import { ENDPOINT } from '../../../../../shared/interfaces/endpoints-enum';
 
 @Component({
   selector: 'app-liste-produits',
@@ -15,7 +16,7 @@ export class ListeProduitsComponent implements OnInit {
   produits!: Observable<SimpleProduct[]>;
   pageSizeOptions = [5, 10, 20, 50];
   currentPage: number = 0;
-  endpoint = "produits";
+  endpoint = ENDPOINT.PRODUITS;
   constructor(public produitsService: CrudService, private router: Router) {
 
   }

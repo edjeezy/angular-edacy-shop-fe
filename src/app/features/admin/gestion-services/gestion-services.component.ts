@@ -4,6 +4,7 @@ import { CrudService, PaginationOptions } from '../../../shared/services/crud/cr
 import { MatDialog } from '@angular/material/dialog';
 import { ModalWrapperComponent } from '../components/modal-wrapper/modal-wrapper.component';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ENDPOINT } from '../../../shared/interfaces/endpoints-enum';
 
 
 export interface Service {
@@ -23,7 +24,7 @@ export class GestionServicesComponent implements OnInit {
   services!: Observable<any[]>;
   pageSizeOptions = [5, 10, 20, 50];
   currentPage: number = 0;
-  endpoint = "services"; 
+  endpoint = ENDPOINT.SERVICES; 
   form = new FormGroup({
     type: new FormControl('', [Validators.required]),
     prix: new FormControl(0, [Validators.required, Validators.max(900000000000)])

@@ -1,0 +1,30 @@
+<div class="w-screen p-3 bg-amber-400 text-slate-950 flex items-center justify-between">
+    <div class="flex flex-row gap-2 items-center" >   
+        
+        
+         <button #menuBtn class="inline" 
+         mat-icon-button color="accent" 
+         aria-label="Menu de l'application"
+         [matMenuTriggerFor]="menuAcceuil">
+            <mat-icon>menu</mat-icon>
+        </button>
+
+        <mat-menu #menuAcceuil="matMenu">
+            <ng-container *ngIf="menu$ | async as menuItems">
+                <button mat-menu-item  *ngFor="let item of menuItems" class="flex flex-row gap-1 items-center hover:text-amber-400">
+                  <mat-icon> {{item.icon}} </mat-icon>
+                  <div> {{item.title}} </div>
+                </button>
+            </ng-container>
+            
+        </mat-menu>
+
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcREJaM2ornErabYQ3-nJbMSVT1sQGziTbWr6Uzgi0Wy3g&s" width="48" alt="">
+    </div>
+    <div class="space-x-2">
+        <a routerLink="acceuil" routerLinkActive="underline text-white" class="text-slate-900 underline  hover:text-white cursor-pointer">Acceuil</a>
+        <a routerLink="panier" routerLinkActive="underline text-white" class="text-slate-900 hover:text-white cursor-pointer">Panier</a>
+        <a routerLink="services" routerLinkActive="underline text-white"  class="text-slate-900 hover:text-white cursor-pointer">Services</a>
+        <app-reusable-button (click)="logout()" [btnText]="'LOG OUT'" />
+    </div>
+</div>
