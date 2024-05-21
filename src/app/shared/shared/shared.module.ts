@@ -16,6 +16,7 @@ import { HeaderComponent } from '../components/header/header.component';
 import { MatIconModule } from '@angular/material/icon';
 import { CarouselModule } from 'primeng/carousel';
 import { CardModule } from 'primeng/card';
+import {MatExpansionModule} from '@angular/material/expansion';
 
 const MAT_COMPONENTS = [
   MatInputModule,
@@ -27,6 +28,7 @@ const MAT_COMPONENTS = [
   MatDialogModule,
   MatButtonModule,
   MatIconModule,
+  MatExpansionModule
 ]
 
 const PRIMENG_COMPONENTS = [

@@ -1,0 +1,22 @@
+<div class="w-full flex flex-col items-center content-center">
+    <div class="container">
+        <h1 class="font-bold text-2xl my-2 text-center">FAQ</h1>
+        <ng-container *ngIf="faq$ | async as faq">
+            <mat-accordion>
+                <mat-expansion-panel *ngFor="let item of faq">
+                    <mat-expansion-panel-header>
+                      <mat-panel-title>
+                        {{item.title}}
+                      </mat-panel-title>
+                      <mat-panel-description>
+                        {{item.shortDescription}}
+                      </mat-panel-description>
+                    </mat-expansion-panel-header>
+                    <p>
+                        {{item.longDescription}}
+                    </p>
+                  </mat-expansion-panel>
+            </mat-accordion>
+        </ng-container>
+    </div>
+</div>

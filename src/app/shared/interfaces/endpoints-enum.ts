@@ -3,4 +3,5 @@ export enum ENDPOINT {
     LANDING = 'landing',
     PRODUITS = 'produits',
     SERVICES = 'services',
+    FAQ = "faq"
 }

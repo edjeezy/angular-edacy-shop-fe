@@ -6,6 +6,7 @@ import { SharedModule } from '../../shared/shared/shared.module';
 import { HeroComponent } from './components/hero/hero.component';
 import { CategoriesCarousselComponent } from './components/categories-caroussel/categories-caroussel.component';
 import { LandingListProductComponent } from './components/landing-list-product/landing-list-product.component';
+import { LandingFaqComponent } from './components/landing-faq/landing-faq.component';
 
 const routes: Routes = [
   {
@@ -20,6 +21,7 @@ const routes: Routes = [
     HeroComponent,
     CategoriesCarousselComponent,
     LandingListProductComponent,
+    LandingFaqComponent,
   ],
   imports: [
     CommonModule,
