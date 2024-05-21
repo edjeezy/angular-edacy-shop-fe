@@ -61,3 +61,11 @@ export class AppComponent implements OnInit {
     this.produits = this.productCache.filter((_produit) =>  _produit.name.includes(t));
   }
 }
+
+// Home page 
+// app-landing
+// app-categories
+// app-products
+// app-faq
+
+// Search bar (if possible)

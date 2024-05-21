@@ -8,7 +8,7 @@ import { CanActivateAuthGuard } from './shared/guards/auth.guard';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'login',
+    redirectTo: 'acceuil',
     pathMatch: 'full',
   },
   {
@@ -22,6 +22,10 @@ const routes: Routes = [
       }
     ]
  */
+  },
+  {
+    path: 'acceuil',
+    loadChildren: () => import('./features/landing/landing.module').then(m => m.LandingModule)
   },
   {
     path: 'produits',
