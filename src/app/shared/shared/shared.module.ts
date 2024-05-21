@@ -14,6 +14,7 @@ import {MatDialogModule} from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { HeaderComponent } from '../components/header/header.component';
 import { MatIconModule } from '@angular/material/icon';
+import { CarouselModule } from 'primeng/carousel';
 
 const MAT_COMPONENTS = [
   MatInputModule,
@@ -27,6 +28,10 @@ const MAT_COMPONENTS = [
   MatIconModule,
 ]
 
+const PRIMENG_COMPONENTS = [
+  CarouselModule
+];
+
 @NgModule({
   declarations: [
     SearchComponent,
@@ -38,7 +43,8 @@ const MAT_COMPONENTS = [
     FormsModule,
     HttpClientModule,
     ReactiveFormsModule,
-    ...MAT_COMPONENTS
+    ...MAT_COMPONENTS,
+    ...PRIMENG_COMPONENTS
   ],
   exports: [
     SearchComponent,
@@ -47,7 +53,8 @@ const MAT_COMPONENTS = [
     HttpClientModule,
     ReactiveFormsModule,
     HeaderComponent,
-    ...MAT_COMPONENTS
+    ...MAT_COMPONENTS,
+    ...PRIMENG_COMPONENTS
   ],
 })
 export class SharedModule { }

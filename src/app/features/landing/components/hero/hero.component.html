@@ -1,0 +1,14 @@
+<ng-container *ngIf="landing$ | async as landing">
+    <p-carousel [value]="landing" [numVisible]="1" [autoplayInterval]="5000">
+        <ng-template pTemplate="item" let-item>
+            <div class="hero-container">
+                <img [src]="item.imageUrl" [alt]="item.title" class="hero-image">
+                <div class="hero-content">
+                    <h1>{{ item.title }}</h1>
+                    <p>{{ item.description }}</p>
+                    <button mat-button color="primary" type="button" (click)="onLearnMoreClick()">En Savoir Plus</button>
+                </div>
+            </div>
+        </ng-template>
+    </p-carousel>
+</ng-container>

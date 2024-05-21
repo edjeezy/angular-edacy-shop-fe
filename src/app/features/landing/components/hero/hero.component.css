@@ -1,0 +1,39 @@
+.hero-container {
+    height: 600px; /* Adjust height as needed */
+    overflow: hidden;
+    position: relative;
+  }
+  
+  .hero-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensure image fills container */
+  }
+  
+  .hero-content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    top: 0;
+    padding: 20px;
+    color: white;
+    z-index: 99;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+  }
+  
+  .hero-content h1 {
+    font-size: 2em;
+    margin-bottom: 10px;
+  }
+  
+  .hero-content p {
+    font-size: 1.2em;
+    margin-bottom: 20px;
+  }
+  
+  .hero-content button {
+    background-color: #007bff;
+    color: white;
+    border-color: #007bff;
+  }
+  

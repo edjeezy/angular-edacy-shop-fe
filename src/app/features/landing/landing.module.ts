@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { RouterModule, Routes } from '@angular/router';
 import { SharedModule } from '../../shared/shared/shared.module';
+import { HeroComponent } from './components/hero/hero.component';
 
 const routes: Routes = [
   {
@@ -14,6 +15,7 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     LandingPageComponent,
+    HeroComponent,
   ],
   imports: [
     CommonModule,
