@@ -1,0 +1,23 @@
+<ng-container *ngIf="cat$ | async as categorie" >
+    <div class="w-full">
+        <p-carousel
+            [value]="categorie"
+            [numVisible]="4"
+            [numScroll]="1"
+            [circular]="true"
+        >
+        <ng-template let-cat pTemplate="item" >
+            <div [style.background]="cat.color" class="border border-black rounded-lg flex flex-col items-center mx-1 cursor-pointer">
+                <div >
+                    <mat-icon style="height: 64px; width: 64px; font-size: 64px;">
+                        {{cat.icon}}
+                    </mat-icon>
+                </div>
+                <div>
+                    {{cat.title}}
+                </div>
+            </div>
+        </ng-template>
+        </p-carousel>
+    </div>  
+</ng-container> 

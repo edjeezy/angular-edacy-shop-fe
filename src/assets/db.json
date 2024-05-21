@@ -486,61 +486,71 @@
       "id": 1,
       "title": "Mode",
       "description": "Découvrez les dernières tendances et trouvez votre style.",
-      "icon": "fashion"
+      "icon": "styler",
+      "color": "#AB47BC"
     },
     {
       "id": 2,
       "title": "Maison et Jardin",
       "description": "Aménagez votre intérieur et embellissez votre extérieur.",
-      "icon": "home"
+      "icon": "home",
+      "color": "#66BB6A"
     },
     {
       "id": 3,
       "title": "High-Tech",
       "description": "Les derniers gadgets et technologies pour rester à la pointe.",
-      "icon": "computer"
+      "icon": "computer",
+      "color": "#FFCA28"
     },
     {
       "id": 4,
       "title": "Sports et Loisirs",
       "description": "Trouvez tout pour vos activités sportives et vos moments de détente.",
-      "icon": "directions_run"
+      "icon": "directions_run",
+      "color": "#8D6E63"
     },
     {
       "id": 5,
       "title": "Beauté et Bien-être",
       "description": "Prenez soin de vous et découvrez des produits pour votre beauté.",
-      "icon": "spa"
+      "icon": "spa",
+      "color": "#FAFAFA"
     },
     {
       "id": 6,
       "title": "Enfants et Bébés",
       "description": "Tout ce dont vous avez besoin pour le bonheur de vos petits.",
-      "icon": "child_care"
+      "icon": "child_care",
+      "color": "#FAFAFA"
     },
     {
       "id": 7,
       "title": "Livres et Musique",
       "description": "Plongez dans un bon livre ou découvrez de nouvelles musiques.",
-      "icon": "library_books"
+      "icon": "library_books",
+      "color": "#FAFAFA"
     },
     {
       "id": 8,
       "title": "Bricolage et Jardinage",
       "description": "Aménagez et embellissez votre intérieur et votre extérieur.",
-      "icon": "handyman"
+      "icon": "handyman",
+      "color": "#FAFAFA"
     },
     {
       "id": 9,
       "title": "Animaux",
       "description": "Trouvez tout pour le bonheur et le bien-être de vos animaux.",
-      "icon": "pets"
+      "icon": "pets",
+      "color": "#FAFAFA"
     },
     {
       "id": 10,
       "title": "Voyages et Tourisme",
       "description": "Préparez vos escapades et découvrez de nouveaux horizons.",
-      "icon": "flight"
+      "icon": "flight",
+      "color": "#FAFAFA"
     }
   ] 
 }

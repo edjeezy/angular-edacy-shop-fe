@@ -15,6 +15,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { HeaderComponent } from '../components/header/header.component';
 import { MatIconModule } from '@angular/material/icon';
 import { CarouselModule } from 'primeng/carousel';
+import { CardModule } from 'primeng/card';
 
 const MAT_COMPONENTS = [
   MatInputModule,
@@ -29,7 +30,8 @@ const MAT_COMPONENTS = [
 ]
 
 const PRIMENG_COMPONENTS = [
-  CarouselModule
+  CarouselModule,
+  CardModule
 ];
 
 @NgModule({

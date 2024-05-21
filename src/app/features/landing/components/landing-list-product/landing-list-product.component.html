@@ -1,0 +1,17 @@
+<ng-container *ngIf="prods$ | async as produits">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-1 items-center">
+        <div class="card flex content-center " *ngFor="let item of produits">
+            <p-card [header]="item.name" [subheader]="item.description" [style]="{ width: '360px' }">
+                <ng-template pTemplate="header">
+                    <img height="270px" [alt]="item.title" [src]="item.image" />
+                </ng-template>
+
+                <ng-template pTemplate="footer">
+                    <div class="flex gap-3 mt-1">
+                        <app-reusable-button [btnText]="'Acheter'" (buttonClicked)="buy()"></app-reusable-button>
+                    </div>
+                </ng-template>
+            </p-card>
+        </div>
+    </div>
+</ng-container>
