@@ -1,11 +1,10 @@
-<div class="w-screen p-3 bg-amber-400 text-slate-950 flex items-center justify-between">
+<div class="p-3 bg-amber-400 text-slate-950 flex items-center justify-between">
     <div class="flex flex-row gap-2 items-center" >   
         
         
          <button #menuBtn class="inline" 
          mat-icon-button color="accent" 
-         aria-label="Menu de l'application"
-         [matMenuTriggerFor]="menuAcceuil">
+         aria-label="Menu de l'application" (click)="emitBurgerClick()">
             <mat-icon>menu</mat-icon>
         </button>
 

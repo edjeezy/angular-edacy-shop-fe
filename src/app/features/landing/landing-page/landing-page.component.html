@@ -1,8 +1,26 @@
-<app-header></app-header>
-<app-hero></app-hero>
-<div class="p-2"></div>
-<app-categories-caroussel></app-categories-caroussel>
-<div class="p-2"></div>
-<app-landing-list-product></app-landing-list-product>
-<div class="p-2"></div>
-<app-landing-faq></app-landing-faq>
+<mat-drawer-container class="w-full bg-gray-200">
+    <mat-drawer #bugerMenu [mode]="mobileQuery.matches ? 'over' : 'side'" [opened]="desktopQuery.matches" style="width: 400px;">
+        <ng-container *ngIf="menu$ | async as menuItems">
+            <mat-nav-list>
+                @for (item of menuItems; track item.icon) {
+                  <a mat-list-item >
+                    <div class="w-full flex flex-row gap-2 items-center">
+                        <mat-icon> {{item.icon}} </mat-icon>
+                        <div> {{item.title}} </div>
+                    </div>
+                  </a>
+                }
+              </mat-nav-list>
+        </ng-container>
+    </mat-drawer>
+    <mat-drawer-content>
+        <app-header (menuClick)="bugerMenu.toggle()" ></app-header>
+        <app-hero></app-hero>
+        <div class="p-2"></div>
+        <app-categories-caroussel></app-categories-caroussel>
+        <div class="p-2"></div>
+        <app-landing-list-product></app-landing-list-product>
+        <div class="p-2"></div>
+        <app-landing-faq></app-landing-faq>
+    </mat-drawer-content>
+</mat-drawer-container>

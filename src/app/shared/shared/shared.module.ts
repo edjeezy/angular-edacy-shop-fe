@@ -17,6 +17,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { CarouselModule } from 'primeng/carousel';
 import { CardModule } from 'primeng/card';
 import {MatExpansionModule} from '@angular/material/expansion';
+import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatListModule} from '@angular/material/list';
 
 const MAT_COMPONENTS = [
   MatInputModule,
@@ -28,8 +30,10 @@ const MAT_COMPONENTS = [
   MatDialogModule,
   MatButtonModule,
   MatIconModule,
-  MatExpansionModule
-]
+  MatExpansionModule,
+  MatSidenavModule,
+  MatListModule
+];
 
 const PRIMENG_COMPONENTS = [
   CarouselModule,

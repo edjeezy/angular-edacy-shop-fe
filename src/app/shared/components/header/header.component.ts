@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { MatMenuTrigger } from '@angular/material/menu';
 import { CrudService } from '../../services/crud/crud.service';
@@ -13,6 +13,7 @@ import { ENDPOINT } from '../../interfaces/endpoints-enum';
 export class HeaderComponent implements OnInit {
   @ViewChild(MatMenuTrigger) trigger!: MatMenuTrigger;
   @ViewChild('menuBtn') menuBtn!: any;
+  @Output() menuClick = new EventEmitter()
   menu$ !: Observable<any[]>;
   constructor(
     private auth: AuthService,
@@ -26,6 +27,10 @@ export class HeaderComponent implements OnInit {
 
   logout() {
     this.auth.logout();
+  }
+
+  emitBurgerClick() {
+    this.menuClick.emit();
   }
 
 }
