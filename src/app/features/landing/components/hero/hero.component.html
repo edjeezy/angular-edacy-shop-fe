@@ -1,16 +1,20 @@
-<div class="pt-4">
-    <ng-container *ngIf="landing$ | async as landing">
-        <p-carousel [value]="landing" [numVisible]="1" [autoplayInterval]="5000">
-            <ng-template pTemplate="item" let-item>
-                <div class="hero-container rounded-2xl">
-                    <img [src]="item.imageUrl" [alt]="item.title" class="hero-image">
-                    <div class="hero-content">
-                        <h1>{{ item.title }}</h1>
-                        <p>{{ item.description }}</p>
-                        <button mat-button color="primary" type="button" (click)="onLearnMoreClick()">En Savoir Plus</button>
+@defer {
+    <div class="pt-4">
+        <ng-container *ngIf="landing$ | async as landing">
+            <p-carousel [value]="landing" [numVisible]="1" [autoplayInterval]="5000">
+                <ng-template pTemplate="item" let-item>
+                    <div class="hero-container rounded-2xl">
+                        <img [src]="item.imageUrl" [alt]="item.title" class="hero-image">
+                        <div class="hero-content">
+                            <h1>{{ item.title }}</h1>
+                            <p>{{ item.description }}</p>
+                            <button mat-button color="primary" type="button" (click)="onLearnMoreClick()">En Savoir Plus</button>
+                        </div>
                     </div>
-                </div>
-            </ng-template>
-        </p-carousel>
-    </ng-container>
-</div>
+                </ng-template>
+            </p-carousel>
+        </ng-container>
+    </div>
+} @placeholder {
+    <div class="w-full h-80 bg-slate-200"  ></div>
+}

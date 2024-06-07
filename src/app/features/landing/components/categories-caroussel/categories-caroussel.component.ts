@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, afterNextRender } from '@angular/core';
 import { CrudService } from '../../../../shared/services/crud/crud.service';
 import { Observable } from 'rxjs';
 import { ENDPOINT } from '../../../../shared/interfaces/endpoints-enum';
@@ -10,9 +10,13 @@ import { ENDPOINT } from '../../../../shared/interfaces/endpoints-enum';
 })
 export class CategoriesCarousselComponent implements OnInit {
   cat$ !: Observable<any[]>;
-  constructor(private crud: CrudService) {}
+  constructor(private crud: CrudService) {
+
+    afterNextRender(() => {
+      this.cat$ = this.crud.getAll(ENDPOINT.CATEGUORIES);
+    })
+  }
 
   ngOnInit(): void {
-      this.cat$ = this.crud.getAll(ENDPOINT.CATEGUORIES);
   }
 }

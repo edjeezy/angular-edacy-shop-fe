@@ -1,0 +1,3 @@
+/acceuil
+/produits/888
+/blog/article-1830382820
